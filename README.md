@@ -26,3 +26,24 @@
 - [ ] Need to find directors from a given movie name (All movies details cleaned dataset)
   - Use movie titles, search via wikipedia or dbpedia for the movie director. Try to get tmbd/imbdb ID so we can easily match entites.
 - [ ] Join together relationship
+
+## Nodes
+- Person
+  - tmdbID (optional)
+- Movie
+ - Title
+ - tmbdID
+- Award
+- Language
+- Genre
+
+## Relationships
+
+- Directed (Person->Movie)
+- Acted_In (Person->Movie)
+- Speaks (Movie->Language)
+- Won (Person->Movie)
+  - Years
+- Nominated (Person->Movie)
+  - Years
+- Belongs_In (Movie->Genre)
