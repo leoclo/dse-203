@@ -42,8 +42,8 @@
 - Directed (Person->Movie)
 - Acted_In (Person->Movie)
 - Speaks (Movie->Language)
-- Won (Person->Movie)
+- Won (Person->Award)
   - Years
-- Nominated (Person->Movie)
+- Nominated (Person->Award)
   - Years
 - Belongs_In (Movie->Genre)
