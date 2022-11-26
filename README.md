@@ -25,9 +25,6 @@ Password: 1234
 ## Local Installation
 ___
 
-Clone the repository or download the .zip file and extract it on the desired directory
-
-
 Create a virtual environment with the command:
 
 ```bash
