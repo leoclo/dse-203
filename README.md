@@ -1,8 +1,85 @@
-## Dataset
+# Neo4j dse-203 Final Project
 
-- https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg?select=AllMoviesDetailsCleaned.csv
-- https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg?select=220k_awards_by_directors.csv
-- https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg?select=AllMoviesCastingRaw.csv
+# Introduction
+
+Project to create graph database for movies kaggle dataset and custom data crawlers for the DSE 203 course
+
+Clone the repository or download the .zip file and extract it on the desired directory
+
+
+## Local Enviroment Setup with Docker
+___
+
+To setup app local enviroment install [docker](https://docs.docker.com/get-docker/)
+and run the following command on the root directory of the project, this will create
+containers. For reference [neo4j docker](https://neo4j.com/docs/operations-manual/current/docker/introduction/).
+
+```bash
+docker-compose up -d
+```
+
+On your browser you will be able to login to neo4j on the following URL: http://localhost:7474/browser/
+Username: neo4j
+Password: 1234
+
+## Local Installation
+___
+
+Clone the repository or download the .zip file and extract it on the desired directory
+
+
+Create a virtual environment with the command:
+
+```bash
+python3 -m venv venv
+```
+
+Activate the created enviroment:
+
+```bash
+source venv/bin/activate
+```
+
+Install the requirements for the project
+
+```bash
+pip install -r requirements.txt
+```
+
+## Dataset Download Kaggle
+
+https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg
+
+Download the dataset and unzip in folder src/files
+
+
+## Running ETL
+
+With the pyenv activate:
+
+```bash
+source venv/bin/activate
+```
+
+Run the following
+
+```bash
+ python src/app.py settings.json etl
+
+ ```
+
+On your browser login to neo4j on the following URL:
+
+http://localhost:7474/browser/
+
+Got to the database and see Node labels created
+
+
+Note:
+
+There is a notebook in root folder called app.ipynb that can also be used for
+using app modules
+
 
 ## Wikipedia/DBPedia data points
 

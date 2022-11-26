@@ -1,0 +1,24 @@
+{
+	"neo4j": {
+		"uri": "bolt://localhost:7687",
+		"username": "neo4j",
+		"password": "1234",
+		"db": null
+	},
+	"csv_map":{
+		"directors": {
+			"filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
+			"sep": ";"
+		}
+	},
+	"etl":{
+		"directors": {
+			"node_name": "Director",
+			"column_map": {
+				"imdbID": "id",
+				"name": "name",
+				"Total awards": "total_awards"
+			}
+		}
+	}
+}
