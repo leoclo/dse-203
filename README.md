@@ -15,7 +15,7 @@ and run the following command on the root directory of the project, this will cr
 containers. For reference [neo4j docker](https://neo4j.com/docs/operations-manual/current/docker/introduction/).
 
 ```bash
-docker-compose up -d
+make run
 ```
 
 On your browser you will be able to login to neo4j on the following URL: http://localhost:7474/browser/
