@@ -6,9 +6,9 @@ Project to create graph database for movies kaggle dataset and custom data crawl
 
 Clone the repository or download the .zip file and extract it on the desired directory
 
-
 ## Local Enviroment Setup with Docker
-___
+
+---
 
 To setup app local enviroment install [docker](https://docs.docker.com/get-docker/)
 and run the following command on the root directory of the project, this will create
@@ -23,7 +23,8 @@ Username: neo4j
 Password: 1234
 
 ## Local Installation
-___
+
+---
 
 Create a virtual environment with the command:
 
@@ -49,7 +50,6 @@ https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedb
 
 Download the dataset and unzip in folder src/files
 
-
 ## Running ETL
 
 With the pyenv activate:
@@ -63,7 +63,7 @@ Run the following
 ```bash
  python src/app.py settings.json etl
 
- ```
+```
 
 On your browser login to neo4j on the following URL:
 
@@ -71,12 +71,10 @@ http://localhost:7474/browser/
 
 Got to the database and see Node labels created
 
-
 Note:
 
 There is a notebook in root folder called app.ipynb that can also be used for
 using app modules
-
 
 ## Wikipedia/DBPedia data points
 
@@ -102,14 +100,18 @@ using app modules
 - [ ] Join together relationship
 
 ## Nodes
+
 - Person
-  - tmdbID (optional)
+  - Name
 - Movie
- - Title
- - tmbdID
+  - Language
+  - Production Country
+  - Genre
+  - Title
+  - tmbdID
+  - imdbID
 - Award
-- Language
-- Genre
+- Production Company
 
 ## Relationships
 
