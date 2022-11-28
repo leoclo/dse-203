@@ -4,7 +4,8 @@
 /logs
 /plugins
 /venv
-/src/.ipynb_checkpoints
+/files
+.ipynb_checkpoints
 */__pycache__
 */*/__pycache__
 
