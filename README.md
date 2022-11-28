@@ -102,24 +102,27 @@ using app modules
 ## Nodes
 
 - Person
-  - Name
+  - Name (String)
 - Movie
-  - Language
-  - Production Country
-  - Genre
-  - Title
-  - tmbdID
-  - imdbID
+  - Language (String)
+  - Production Country (String)
+  - Genre  (String)
+  - Title  (String)
+  - tmbdID (String)
+  - imdbID (String)
+  - budget (int)
+  - popularity (float)
 - Award
+  - Name (String)
 - Production Company
+  - Name (string)
 
 ## Relationships
 
 - Directed (Person->Movie)
+- Produced (Production Compnay->Movie)
 - Acted_In (Person->Movie)
-- Speaks (Movie->Language)
 - Won (Person->Award)
-  - Years
+  - Years (Int[])
 - Nominated (Person->Award)
-  - Years
-- Belongs_In (Movie->Genre)
+  - Years (Int[])
