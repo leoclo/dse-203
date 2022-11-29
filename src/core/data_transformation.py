@@ -12,5 +12,9 @@ class DataFrameTransform():
         return getattr(self, k)
 
     def directors(self, df):
-        print('transform')
-        return df
+        return df.dropna()
+
+    def movies(self, df):
+        df = df.iloc[0:8000]
+        df = df[df['lang'] == 'en']
+        return df.dropna()

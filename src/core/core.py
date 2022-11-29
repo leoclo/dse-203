@@ -8,6 +8,7 @@ def etl(graph4j, settings):
     df_params = []
     for k, meta in settings['etl'].items():
         df = pd.read_csv(**settings['csv_map'][k])
+        df = df[meta['column_map'].keys()]
         df.rename(columns=meta['column_map'], inplace=True)
         df = df[meta['column_map'].values()]
         df = DataFrameTransform(df, k).df
