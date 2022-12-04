@@ -31,7 +31,6 @@ def run_app(settings, action):
             print(app.graph4j.queries[-1])
 
 
-
     return None
 
 

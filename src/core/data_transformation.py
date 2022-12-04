@@ -4,17 +4,29 @@
 class DataFrameTransform():
     """Use to create specific dataframe transformations"""
 
-    def __init__(self, df, k):
-        self.df = self[k](df)
+    def __init__(self):
+        self.dfs = {}
+
         return None
 
     def __getitem__(self, k):
+        print(f'==== TRANSFORM {k} ====')
         return getattr(self, k)
 
     def directors(self, df):
-        return df.dropna()
+        self.dfs['directors'] = df.dropna()
+        return self.dfs['directors']
 
     def movies(self, df):
-        df = df.iloc[0:8000]
-        df = df[df['lang'] == 'en']
-        return df.dropna()
+        df = df[df['lang'] == 'en'].dropna()
+        import ipdb; ipdb.set_trace()
+        self.dfs['movies'] = df
+        return self.dfs['movies']
+
+    def cast(self, df):
+        self.dfs['cast'] = df.dropna()
+        return self.dfs['cast']
+
+
+
+

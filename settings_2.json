@@ -17,11 +17,15 @@
 		"movies": {
 			"filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
 			"sep": ";"
+		},
+		"cast": {
+			"filepath_or_buffer": "src/files/archive/AllMoviesCastingRaw.csv",
+			"sep": ";"
 		}
 	},
 	"etl":{
 		"directors": {
-			"node_name": "Directors",
+			"node_name": "Person",
 			"column_map": {
 				"name": "name"
 			}
@@ -35,6 +39,21 @@
 				"original_language": "lang",
 				"original_title": "title",
 				"overview": "overview"
+			}
+		},
+		"cast": {
+			"node_name": "Person",
+			"column_map": {
+				"actor1_name": "actor_1",
+				"actor1_gender": "actor_1_gender",
+				"actor2_name": "actor_2",
+				"actor2_gender": "actor_2_gender",
+				"actor3_name": "actor_3",
+				"actor3_gender": "actor_3_gender",
+				"actor4_name": "actor_4",
+				"actor4_gender": "actor_4_gender",
+				"actor5_name": "actor_5",
+				"actor5_gender": "actor_5_gender"
 			}
 		}
 	}
