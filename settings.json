@@ -1,41 +1,153 @@
 {
-	"neo4j": {
-		"uri": "bolt://localhost:7687",
-		"username": "neo4j",
-		"password": "1234",
-		"db": null,
-		"file_folder": "/import/",
-		"insertion_mode": "csv_file",
-		"clear_data": true,
-		"cap_insert": 25000
-	},
-	"csv_map":{
-		"directors": {
-			"filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
-			"sep": ";"
-		},
-		"movies": {
-			"filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
-			"sep": ";"
-		}
-	},
-	"etl":{
-		"directors": {
-			"node_name": "Directors",
-			"column_map": {
-				"name": "name"
-			}
-		},
-		"movies": {
-			"node_name": "Movie",
-			"column_map": {
-				"id": "movie_id",
-				"imdb_id": "imdb_id",
-				"genres": "genres",
-				"original_language": "lang",
-				"original_title": "title",
-				"overview": "overview"
-			}
-		}
-	}
+    "neo4j": {
+        "uri": "bolt://localhost:7687",
+        "username": "neo4j",
+        "password": "1234",
+        "db": null,
+        "file_folder": "/import/",
+        "insertion_mode": "rows",
+        "clear_data": true,
+        "cap_insert": 25000
+    },
+    "extract": {
+        "directors": {
+            "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
+            "sep": ";"
+        },
+        "movies": {
+            "filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
+            "sep": ";"
+        },
+        "cast": {
+            "filepath_or_buffer": "src/files/archive/AllMoviesCastingRaw.csv",
+            "sep": ";"
+        }
+    },
+    "transform": {
+        "directors": {
+            "column_map": {
+                "name": "name",
+                "Academy Fellowship": "acad_fellow"
+            }
+        },
+        "movies": {
+            "column_map": {
+                "id": "movie_id",
+                "imdb_id": "imdb_id",
+                "original_language": "lang",
+                "original_title": "title",
+                "overview": "overview",
+                "genres": "genres"
+            }
+        },
+        "cast": {
+            "column_map": {
+                "id": "movie_id",
+                "actor1_name": "actor1_name",
+                "actor1_gender": "actor1_gender",
+                "actor2_name": "actor2_name",
+                "actor2_gender": "actor2_gender",
+                "actor3_name": "actor3_name",
+                "actor3_gender": "actor3_gender",
+                "actor4_name": "actor4_name",
+                "actor4_gender": "actor4_gender",
+                "actor5_name": "actor5_name",
+                "actor5_gender": "actor5_gender",
+                "director_name": "director_name",
+                "director_gender": "director_gender"
+            }
+        }
+    },
+    "load": {
+        "constraints": [
+            {
+                "name": "Genres",
+                "node_name": "Genre",
+                "field": "name"
+            },
+            {
+                "name": "People",
+                "node_name": "Person",
+                "field": "name"
+            },
+            {
+                "name": "Movies",
+                "node_name": "Movie",
+                "field": "movie_id"
+            }
+        ],
+        "data":{
+        	"people": [{
+        		"ref": "p",
+        		"node_name": "Person",
+        		"cols": ["name", "gender"]
+        	}],
+        	"genres": [{
+        		"ref": "g",
+        		"node_name": "Genre",
+        		"cols": ["name"]
+        	}],
+        	"movies": [
+	            {
+	                "ref": "m",
+	                "node_name": "Movie",
+	                "cols": [
+	                    "movie_id",
+	                    "imdb_id",
+	                    "lang",
+	                    "title",
+	                    "overview"
+	                ]
+	            },
+	            {
+	            	"unwind": "directors",
+	            	"needs": "m",
+	                "ref": "d",
+	                "node_name": "Person",
+	                "cols": ["name"],
+	                "relations": [
+	                    {
+	                        "begins": "d",
+	                        "begins_dir": "-",
+	                        "name": "DIRECTED",
+	                        "ends_dir": "->",
+	                        "ends": "m"
+	                    }
+	                ]
+	            },
+	            {
+	                "unwind": "genres",
+	                "needs": "m",
+	                "ref": "g",
+	                "node_name": "Genre",
+	                "cols": ["name"],
+	                "relations": [
+	                    {
+	                        "begins": "m",
+	                        "begins_dir": "-",
+	                        "name": "HAS_GENRE",
+	                        "ends": "g",
+	                        "ends_dir": "->"
+	                    }
+	                ]
+	            },
+	            {
+	                "unwind": "actors",
+	                "needs": "m",
+	                "ref": "a",
+	                "node_name": "Person",
+	                "cols": ["name"],
+	                "relations": [
+	                    {
+	                        "begins": "a",
+	                        "begins_dir": "-",
+	                        "name": "ACTED_IN",
+	                        "ends_dir": "->",
+	                        "ends": "m"
+	                    }
+	                ]
+	            }
+        	]
+    	}
+    }
 }

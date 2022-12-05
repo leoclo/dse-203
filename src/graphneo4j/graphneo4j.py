@@ -1,9 +1,42 @@
 import pandas as pd
 from neo4j import GraphDatabase
 
-def write_node_cols(node_name, cols):
-    cols_query = '{' + ','.join([f'{col}: row.{col}' for col in df.columns]) + '}'
-    return f'MERGE (:{node_name} {cols_query})'
+
+def write_merges(merges):
+    return '\n'.join([
+        write_node_merge(**merge) for merge in merges
+    ])
+
+def write_node(ref, node_name, cols, row):
+    cols_query = '{' + ', '.join([f'{col}: {row}.{col}' for col in cols]) + '}'
+    return f'({ref}:{node_name} {cols_query})'
+
+def write_node_merge(node_name, cols, ref, unwind=None, needs=None, relations=None):
+    row = 'row'
+    merge = 'MERGE'
+    unwind_query = ''
+    if unwind:
+        merge = 'MATCH'
+        row = unwind
+        unwind_query = f'WITH row, {needs}\nUNWIND row.{unwind} AS {unwind}'
+
+    relation_qry = ''
+    if relations:
+        relation_qry = write_relations(relations)
+
+    node_query = write_node(ref, node_name, cols, row)
+
+    return f'{unwind_query}\n{merge} {node_query}\n{relation_qry}'
+
+
+def write_relation_merge(begins, begins_dir, name, ends, ends_dir):
+    return f'MERGE ({begins}){begins_dir}[:{name}]{ends_dir}({ends})'
+
+
+def write_relations(relations):
+    return '\n'.join([
+        write_relation_merge(**rel) for rel in relations
+    ])
 
 
 class GraphNeo4j():
@@ -53,6 +86,8 @@ class GraphNeo4j():
         self.driver.close()
 
     def run_query(self, query, params):
+        query = query.strip()
+        print(query)
         if self.db:
             with self.driver.session(database=self.db) as session:
                 self.res.append(list(session.run(query, params)))
@@ -63,22 +98,28 @@ class GraphNeo4j():
             self.res.append(list(session.run(query, params)))
             self.queries.append(query)
 
-    def df2neo4j(self, df, node_name):
+    def create_constraint(self, name, node_name, field):
+        query = (
+        f'''CREATE CONSTRAINT {name}
+        IF NOT EXISTS ON (c:{node_name})
+        ASSERT c.{field} IS UNIQUE''')
+        self.run_query(query, {})
+
+    def df2neo4j(self, df, merges):
         if self.clear_data:
             try:
-                query = f'''
-                    MATCH (n:{node_name}) DELETE n;
-                '''
+                query = f'''MATCH (n:{node_name}) DELETE n'''
                 self.run_query(query, {})
             except: pass
 
+
+        merge_qry = write_merges(merges)
         if self.insertion_mode == 'csv_file':
-            self.df2neo4j_csv(df, node_name)
-            return
+            return self.df2neo4j_csv(df, merge_qry)
 
-        self.df2neo4j_batch(df, node_name)
+        return self.df2neo4j_batch(df, merge_qry)
 
-    def df2neo4j_batch(self, df, node_name):
+    def df2neo4j_batch(self, df, merge_qry):
         total = 0
         batch = 0
         result = None
@@ -87,32 +128,27 @@ class GraphNeo4j():
         if self.cap_insert:
             max_rows = self.cap_insert
 
-        merge_qry = write_node_cols(node_name, df.columns)
         while batch * self.batch_size < max_rows:
             print(f'batch {batch}')
 
-            query = f'''
-                UNWIND $rows AS row
-                {merge_qry}
-                RETURN count(*) as total
-            '''
-            self.run_query(query, {'rows': df[batch*self.batch_size:(batch+1)*self.batch_size].to_dict('records')})
+            query = (
+            f'''UNWIND $rows AS row\n{merge_qry}\nRETURN count(*) as total''')
+            self.run_query(query, {'rows': df.iloc[batch*self.batch_size:(batch+1)*self.batch_size].to_dict('records')})
             total += self.res[-1][0]['total']
             batch += 1
 
-    def df2neo4j_csv(self, df, node_name):
-        file_name = f'{node_name}.csv'
-        df[0:self.cap_insert].to_csv(f'{self.file_folder}{file_name}')
+        return self
 
-        merge_qry = write_node_cols(node_name, df.columns)
-        query = f'''
-            :auto USING PERIODIC COMMIT {self.batch_size}
-            LOAD CSV  WITH HEADERS FROM 'file:///{file_name}' AS row
-            {merge_qry}
-            RETURN count(*) as total
-        '''
+    def df2neo4j_csv(self, df, merge_qry):
+        file_name = f'final_data.csv'
+        df.iloc[0:self.cap_insert].to_csv(f'{self.file_folder}{file_name}')
+
+        query = (
+        f''':auto USING PERIODIC COMMIT {self.batch_size}
+        LOAD CSV  WITH HEADERS FROM 'file:///{file_name}' AS row\n{merge_qry}\nRETURN count(*) as total''')
 
         self.run_query(query, {})
+        return self
 
 
 

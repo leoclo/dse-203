@@ -1,10 +1,4 @@
 run:
-	@[ -d ./conf ] || mkdir conf
-	@[ -d ./data ] || mkdir data
-	@[ -d ./import ] || mkdir import
-	@[ -d ./logs ] || mkdir logs
-	@[ -d ./plugins ] || mkdir plugins
-	@[ -d ./files ] || mkdir -p files/archive
 	docker-compose up -d
 
 clean:
