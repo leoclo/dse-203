@@ -9,7 +9,7 @@
 		"clear_data": true,
 		"cap_insert": 25000
 	},
-	"csv_map":{
+	"extract":{
 		"directors": {
 			"filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
 			"sep": ";"
@@ -23,15 +23,13 @@
 			"sep": ";"
 		}
 	},
-	"etl":{
+	"transform":{
 		"directors": {
-			"node_name": "Person",
 			"column_map": {
 				"name": "name"
 			}
 		},
 		"movies": {
-			"node_name": "Movie",
 			"column_map": {
 				"id": "movie_id",
 				"imdb_id": "imdb_id",
@@ -42,19 +40,24 @@
 			}
 		},
 		"cast": {
-			"node_name": "Person",
 			"column_map": {
-				"actor1_name": "actor_1",
-				"actor1_gender": "actor_1_gender",
-				"actor2_name": "actor_2",
-				"actor2_gender": "actor_2_gender",
-				"actor3_name": "actor_3",
-				"actor3_gender": "actor_3_gender",
-				"actor4_name": "actor_4",
-				"actor4_gender": "actor_4_gender",
-				"actor5_name": "actor_5",
-				"actor5_gender": "actor_5_gender"
+				"actor1_name": "actor1_name",
+				"actor1_gender": "actor1_gender",
+				"actor2_name": "actor2_name",
+				"actor2_gender": "actor2_gender",
+				"actor3_name": "actor3_name",
+				"actor3_gender": "actor3_gender",
+				"actor4_name": "actor4_name",
+				"actor4_gender": "actor4_gender",
+				"actor5_name": "actor5_name",
+				"actor5_gender": "actor5_gender",
+				"director_name": "director_name",
+				"screeplay_name": "movie_name"
+
 			}
 		}
-	}
+	},
+	"load": [
+
+	]
 }

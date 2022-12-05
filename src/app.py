@@ -12,8 +12,16 @@ class App():
     def __getitem__(self, k):
         return getattr(self, k)
 
+    def extract(self):
+        return core.extract(self.settings)
+
+    def extract_transform(self):
+        return core.extract_transform(self.settings)
+
     def etl(self):
-        dfs = core.etl(self.graph4j, self.settings)
+        df = self.extract_transform()
+        self.graph4j['df2neo4j'](df, **self.settings['load'])
+
 
 
 def run_app(settings, action):

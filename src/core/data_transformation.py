@@ -1,4 +1,4 @@
-
+import pandas as pd
 
 
 class DataFrameTransform():
@@ -6,7 +6,6 @@ class DataFrameTransform():
 
     def __init__(self):
         self.dfs = {}
-
         return None
 
     def __getitem__(self, k):
@@ -25,7 +24,7 @@ class DataFrameTransform():
 
     def cast(self, df):
         self.dfs['cast'] = df.dropna()
-        return self.dfs['cast']
+        return self.dfs['final']
 
 
 
