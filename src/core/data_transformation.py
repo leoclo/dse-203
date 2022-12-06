@@ -1,4 +1,5 @@
 import pandas as pd
+from .preprocessing import pre_directors, pre_cast
 
 
 class DataFrameTransform():
@@ -14,15 +15,16 @@ class DataFrameTransform():
 
     def directors(self, df):
         # df = df[df['acad_fellow'] > 0].dropna()
-        self.dfs['directors'] = df
+        self.dfs['directors'] = pre_directors(df)
         return self.dfs['directors']
 
     def movies(self, df):
         self.dfs['movies'] = df.dropna()
+        #
         return self.dfs['movies']
 
     def cast(self, df):
-        df = df.dropna()
+        df = pre_cast(df)
 
         companies = []
         people = []
