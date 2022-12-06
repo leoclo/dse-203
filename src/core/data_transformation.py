@@ -28,14 +28,15 @@ class DataFrameTransform():
         people = []
         genres = []
         final_df_data = {
-            "movie_id": [],
-            "imdb_id": [],
-            "lang": [],
-            "title": [],
-            "overview": [],
+            'movie_id': [],
+            'imdb_id': [],
+            'lang': [],
+            'title': [],
+            'overview': [],
             'genres': [],
-            "actors": [],
-            "directors": []
+            'actors': [],
+            'directors': [],
+            'companies': []
         }
         # filtering directors
 
