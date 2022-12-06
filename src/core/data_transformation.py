@@ -24,17 +24,19 @@ class DataFrameTransform():
     def cast(self, df):
         df = df.dropna()
 
+        companies = []
         people = []
         genres = []
         final_df_data = {
-            "movie_id": [],
-            "imdb_id": [],
-            "lang": [],
-            "title": [],
-            "overview": [],
+            'movie_id': [],
+            'imdb_id': [],
+            'lang': [],
+            'title': [],
+            'overview': [],
             'genres': [],
-            "actors": [],
-            "directors": []
+            'actors': [],
+            'directors': [],
+            'companies': []
         }
         # filtering directors
 
@@ -85,7 +87,12 @@ class DataFrameTransform():
             except:
                 final_df_data['genres'].append([])
 
+            company = {'name': row['company']}
+            companies.append(company)
+            final_df_data['companies'].append([company])
+
         self.dfs = {
+            'company': pd.DataFrame(companies).drop_duplicates(subset='name'),
             'people': pd.DataFrame(people).drop_duplicates(subset='name'),
             'genres': pd.DataFrame(genres).drop_duplicates(),
             'movies': pd.DataFrame(final_df_data)

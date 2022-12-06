@@ -37,7 +37,8 @@
                 "original_language": "lang",
                 "original_title": "title",
                 "overview": "overview",
-                "genres": "genres"
+                "genres": "genres",
+                "production_companies": "company"
             }
         },
         "cast": {
@@ -61,6 +62,11 @@
     "load": {
         "constraints": [
             {
+                "name": "Companies",
+                "node_name": "Company",
+                "field": "name"
+            },
+            {
                 "name": "Genres",
                 "node_name": "Genre",
                 "field": "name"
@@ -77,6 +83,11 @@
             }
         ],
         "data":{
+            "company": [{
+                "ref": "c",
+                "node_name": "Company",
+                "cols": ["name"]
+            }],
         	"people": [{
         		"ref": "p",
         		"node_name": "Person",
@@ -115,6 +126,22 @@
 	                    }
 	                ]
 	            },
+                {
+                    "unwind": "companies",
+                    "needs": "m",
+                    "ref": "c",
+                    "node_name": "Company",
+                    "cols": ["name"],
+                    "relations": [
+                        {
+                            "begins": "c",
+                            "begins_dir": "-",
+                            "name": "PRODUCED",
+                            "ends_dir": "->",
+                            "ends": "m"
+                        }
+                    ]
+                },
 	            {
 	                "unwind": "genres",
 	                "needs": "m",
