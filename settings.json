@@ -7,7 +7,7 @@
         "file_folder": "/import/",
         "insertion_mode": "rows",
         "clear_data": true,
-        "cap_insert": 25000
+        "cap_insert": 40000
     },
     "extract": {
         "directors": {
