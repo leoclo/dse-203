@@ -1,3 +1,12 @@
 neo4j==5.3.0
 kaggle==1.5.12
 pandas==1.5.2
+stanza==1.4.2
+gensim==4.2.0
+spacy==3.4.3
+spacy-legacy==3.0.10
+spacy-loggers==1.0.3
+pyLDAvis==3.3.1
+matplotlib==3.6.2
+matplotlib-inline==0.1.6
+nltk==3.7

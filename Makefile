@@ -1,6 +1,9 @@
 run:
 	docker-compose up -d
 
+deps:
+	python3 -m spacy download en
+
 clean:
 	rm -f *~
 	rm -f .*~
