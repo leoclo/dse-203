@@ -19,7 +19,7 @@ class DataFrameTransform():
         return self.dfs['directors']
 
     def movies(self, df):
-        self.dfs['movies'] = df.dropna()
+        self.dfs['movies'] = pre_movies(df)
         #
         return self.dfs['movies']
 
