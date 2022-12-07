@@ -12,18 +12,20 @@ class App():
     def __getitem__(self, k):
         return getattr(self, k)
 
+    def extract_transform(self):
+        return core.extract_transform(self.settings)
+
     def etl(self):
-        dfs = core.etl(self.graph4j, self.settings)
+        dfs = self.extract_transform()
+        return core.load(self.graph4j, dfs, self.settings['load'])
+
 
 
 def run_app(settings, action):
     app = App(settings)
     try:
-        app[action]()
-        if len(app.graph4j.queries):
-            print('====== SUCCESS ======')
-            utils.pretty_print(app.graph4j.queries)
-
+        res = app[action]()
+        return res
     except Exception as e:
         print('====== FAIL ======')
         utils.pretty_print(e.args)
@@ -32,7 +34,6 @@ def run_app(settings, action):
 
 
 
-    return None
 
 
 if __name__ == '__main__':

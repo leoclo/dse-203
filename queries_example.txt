@@ -1,0 +1,7 @@
+MATCH (a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person), (m:Movie)-[:HAS_GENRE]-(g:Genre)
+WHERE d.name='Quentin Tarantino' AND g.name = 'Comedy'
+RETURN DISTINCT a.name, m.title
+
+MATCH (m:Movie)-[:PRODUCED]-(c:Company)
+WHERE c.name='Vía Digital'
+RETURN DISTINCT m.title
