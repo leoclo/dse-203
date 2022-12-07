@@ -9,6 +9,7 @@ clean:
 	rm -f .*~
 	rm -f \#*
 	rm -f .\#*
+	find -iname "__pycache__" | xargs rm -rf
 
 nuke:
 	rm -rf ./conf

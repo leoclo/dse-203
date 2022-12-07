@@ -10,3 +10,4 @@ pyLDAvis==3.3.1
 matplotlib==3.6.2
 matplotlib-inline==0.1.6
 nltk==3.7
+text-unidecode==1.3
