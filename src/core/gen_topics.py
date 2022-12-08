@@ -35,19 +35,47 @@ from nltk.corpus import stopwords
 
 
 class gen_topics():
-    def __init__(self, movies_df):
+    def __init__(self):
         self.stop_words = stopwords.words('english')
-        self.movies_df = movies_df
-        ## Drop movies with Nan
-        self.movies_df['overview'].dropna(inplace=True)
+        self.movies_df = []
 
         # Initialize stanza
         self.nlp = stanza.Pipeline('en')
         self.nlp("don't won't")
 
         self.lda_model = [] # variable to hold the lda_model 
+        self.df_mtopics = [] 
+        self.df_topic_words = []
 
-    def make_topics(self, num_topics=10): # by default set the number of topics to 10
+
+    def batch_process(self,
+                      data_df,
+                      batch_size = 30,
+                      num_topics_per_batch = 10
+                      ):
+        total_topics = int(data_df.shape[0]/batch_size) - 1
+        self.df_mtopics = pd.DataFrame(columns=['movie_id', 'topic'])
+
+        for k in range(total_topics):
+            df_movie_slice = data_df.iloc[k*batch_size:(k+1)*batch_size]
+            if(not df_movie_slice.empty):
+                df_movie_topics = self.make_topics(df_movie_slice, num_topics=num_topics_per_batch)
+                df_movie_topics['topic'] = df_movie_topics['topic'] + k*num_topics_per_batch
+                self.df_mtopics = pd.concat( [self.df_mtopics, df_movie_topics[['movie_id', 'topic']]], axis=0)
+                if (k ==0):
+                    self.df_topic_words = pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])
+                else:
+                    self.df_topic_words = pd.concat( [self.df_topic_words, pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])], axis=0 ) 
+
+        return (self.df_mtopics, self.df_topic_words)       
+
+    def make_topics(self, movies_df, num_topics=10): # by default set the number of topics to 10
+
+        self.movies_df = movies_df
+
+        ## Drop movies with Nan
+        self.movies_df['overview'].dropna(inplace=True)
+
         data = self.clean_data()
         
         # Convert sentences to words        
@@ -83,16 +111,16 @@ class gen_topics():
                                                          per_word_topics=True)  
 
         # Compute Perplexity
-        print('\nPerplexity: ', self.lda_model.log_perplexity(corpus))  
+        # print('\nPerplexity: ', self.lda_model.log_perplexity(corpus))  
         # a measure of how good the model is. lower the better.
 
         # Compute Coherence Score
-        coherence_model_lda = CoherenceModel(model=self.lda_model, texts=data_lemmatized, dictionary=id2word, coherence='c_v')
-        coherence_lda = coherence_model_lda.get_coherence()
-        print('\nCoherence Score: ', coherence_lda)
+        # coherence_model_lda = CoherenceModel(model=self.lda_model, texts=data_lemmatized, dictionary=id2word, coherence='c_v')
+        # coherence_lda = coherence_model_lda.get_coherence()
+        # print('\nCoherence Score: ', coherence_lda)
 
         # Add the topics column to the movies df
-        self.movies_df['topic'] = [self.lda_model[corpus][text][0][0][0] for text in range(len(self.movies_df['overview']))]                
+        self.movies_df['topic'] = [self.lda_model[corpus][text][0][0][0] for text in range(len(self.movies_df['overview']))]
 
         return self.movies_df
 
@@ -141,4 +169,4 @@ class gen_topics():
 
     # Results
     def print_topics(self):
-        print(self.lda_model.print_topics())
+        pprint(self.lda_model.print_topics())
