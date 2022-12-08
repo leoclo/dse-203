@@ -1,6 +1,6 @@
 import pandas as pd
-from .preprocessing import pre_directors, pre_cast
-
+from .preprocessing import pre_directors, pre_cast, pre_movies, pre_award
+from .director_jaccard import map_directors
 
 class DataFrameTransform():
     """Use to create specific dataframe transformations"""
@@ -23,6 +23,21 @@ class DataFrameTransform():
         #
         return self.dfs['movies']
 
+    
+
+    def award(df):
+        df = pre_award(df)
+        
+        award_to_dir = map_directors(self.dfs['directors']['name'], df)
+        df = df[df['director_name'].isin(award_to_dir)]
+        
+        new_df = df[['director_name','category','outcome','year']].groupby(['director_name','category','outcome'])['year'].unique().reset_index()
+        
+        self.dfs['awards'] = new_df
+        
+        return self.dfs['awards']
+    
+    # In cast, merge with the other dataframes
     def cast(self, df):
         df = pre_cast(df)
 
@@ -35,14 +50,22 @@ class DataFrameTransform():
             'lang': [],
             'title': [],
             'overview': [],
+            'vote_average': [],
+            'vote_count': [],
+            'budget': [],
+            'revenue': [],
+            'runtime': [],
             'genres': [],
             'actors': [],
             'directors': [],
             'companies': []
         }
         # filtering directors
-
-        df = df[df['director_name'].isin(self.dfs['directors']['name'])]
+        dir_to_cast, cast_to_dir = map_directors(self.dfs['directors'], df)
+        
+        df = df[df['director_name'].isin(cast_to_dir)]
+        
+        # Merge with movies
         df = pd.merge(df, self.dfs['movies'], how='left', left_on='movie_id', right_on='movie_id')
 
         for row in df.to_dict('records'):
@@ -53,7 +76,7 @@ class DataFrameTransform():
             if c:
                 continue
 
-            for k in ["movie_id", "imdb_id", "lang", "title", "overview"]:
+            for k in ["movie_id", "imdb_id", "lang", "title", "overview", "runtime", "revenue", "vote_average", "vote_count", "budget"]:
                 final_df_data[k].append(row[k])
 
             # directors
@@ -99,7 +122,4 @@ class DataFrameTransform():
             'genres': pd.DataFrame(genres).drop_duplicates(),
             'movies': pd.DataFrame(final_df_data)
         }
-
-
-
 

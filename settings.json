@@ -35,10 +35,15 @@
                 "id": "movie_id",
                 "imdb_id": "imdb_id",
                 "original_language": "lang",
-                "original_title": "title",
+                "title": "title",
                 "overview": "overview",
                 "genres": "genres",
-                "production_companies": "company"
+                "production_companies": "company",
+                "vote_average": "vote_average",
+                "vote_count": "vote_count",
+                "budget": "budget",
+                "revenue": "revenue",
+                "runtime": "runtime"
             }
         },
         "cast": {
@@ -88,44 +93,49 @@
                 "node_name": "Company",
                 "cols": ["name"]
             }],
-        	"people": [{
-        		"ref": "p",
-        		"node_name": "Person",
-        		"cols": ["name", "gender"]
-        	}],
-        	"genres": [{
-        		"ref": "g",
-        		"node_name": "Genre",
-        		"cols": ["name"]
-        	}],
-        	"movies": [
-	            {
-	                "ref": "m",
-	                "node_name": "Movie",
-	                "cols": [
-	                    "movie_id",
-	                    "imdb_id",
-	                    "lang",
-	                    "title",
-	                    "overview"
-	                ]
-	            },
-	            {
-	            	"unwind": "directors",
-	            	"needs": "m",
-	                "ref": "d",
-	                "node_name": "Person",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "d",
-	                        "begins_dir": "-",
-	                        "name": "DIRECTED",
-	                        "ends_dir": "->",
-	                        "ends": "m"
-	                    }
-	                ]
-	            },
+            "people": [{
+                "ref": "p",
+                "node_name": "Person",
+                "cols": ["name", "gender"]
+            }],
+            "genres": [{
+                "ref": "g",
+                "node_name": "Genre",
+                "cols": ["name"]
+            }],
+            "movies": [
+                {
+                    "ref": "m",
+                    "node_name": "Movie",
+                    "cols": [
+                        "movie_id",
+                        "imdb_id",
+                        "lang",
+                        "title",
+                        "overview",
+                        "vote_average",
+                        "vote_count",
+                        "budget",
+                        "revenue",
+                        "runtime"
+                    ]
+                },
+                {
+                    "unwind": "directors",
+                    "needs": "m",
+                    "ref": "d",
+                    "node_name": "Person",
+                    "cols": ["name"],
+                    "relations": [
+                        {
+                            "begins": "d",
+                            "begins_dir": "-",
+                            "name": "DIRECTED",
+                            "ends_dir": "->",
+                            "ends": "m"
+                        }
+                    ]
+                },
                 {
                     "unwind": "companies",
                     "needs": "m",
@@ -142,39 +152,39 @@
                         }
                     ]
                 },
-	            {
-	                "unwind": "genres",
-	                "needs": "m",
-	                "ref": "g",
-	                "node_name": "Genre",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "m",
-	                        "begins_dir": "-",
-	                        "name": "HAS_GENRE",
-	                        "ends": "g",
-	                        "ends_dir": "->"
-	                    }
-	                ]
-	            },
-	            {
-	                "unwind": "actors",
-	                "needs": "m",
-	                "ref": "a",
-	                "node_name": "Person",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "a",
-	                        "begins_dir": "-",
-	                        "name": "ACTED_IN",
-	                        "ends_dir": "->",
-	                        "ends": "m"
-	                    }
-	                ]
-	            }
-        	]
-    	}
+                {
+                    "unwind": "genres",
+                    "needs": "m",
+                    "ref": "g",
+                    "node_name": "Genre",
+                    "cols": ["name"],
+                    "relations": [
+                        {
+                            "begins": "m",
+                            "begins_dir": "-",
+                            "name": "HAS_GENRE",
+                            "ends": "g",
+                            "ends_dir": "->"
+                        }
+                    ]
+                },
+                {
+                    "unwind": "actors",
+                    "needs": "m",
+                    "ref": "a",
+                    "node_name": "Person",
+                    "cols": ["name"],
+                    "relations": [
+                        {
+                            "begins": "a",
+                            "begins_dir": "-",
+                            "name": "ACTED_IN",
+                            "ends_dir": "->",
+                            "ends": "m"
+                        }
+                    ]
+                }
+            ]
+        }
     }
 }
