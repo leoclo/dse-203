@@ -85,9 +85,10 @@ class GraphNeo4j():
     def close(self):
         self.driver.close()
 
-    def run_query(self, query, params):
+    def run_query(self, query, params, print_qry=True):
         query = query.strip()
-        print(query)
+        if print_qry:
+            print(query)
         if self.db:
             with self.driver.session(database=self.db) as session:
                 self.res.append(list(session.run(query, params)))
@@ -133,7 +134,11 @@ class GraphNeo4j():
 
             query = (
             f'''UNWIND $rows AS row\n{merge_qry}\nRETURN count(*) as total''')
-            self.run_query(query, {'rows': df.iloc[batch*self.batch_size:(batch+1)*self.batch_size].to_dict('records')})
+            self.run_query(
+                query,
+                {'rows': df.iloc[batch*self.batch_size:(batch+1)*self.batch_size].to_dict('records')},
+                print_qry=(batch==0)
+            )
             total += self.res[-1][0]['total']
             batch += 1
 

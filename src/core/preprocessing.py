@@ -16,7 +16,7 @@ def pre_directors(df):
 
 def pre_movies(df):
     cur_df = df.dropna()
-    
+
     return cur_df
 
 def pre_cast(df):
@@ -27,12 +27,11 @@ def pre_cast(df):
     df = standardize(df, 'actor3_name')
     df = standardize(df, 'actor4_name')
     df = standardize(df, 'actor5_name')
-    df = standardize(df, 'producer_name')
-    df = standardize(df, 'screeplay_name')
-    df = standardize(df, 'editor_name')
-    
-    df["runtime"] = df["runtime"].fillna(-1).astype("int32")
-    
+    # df = standardize(df, 'title')
+    # df = standardize(df, 'editor_name')
+
+    # df["runtime"] = df["runtime"].fillna(-1).astype("int32")
+
     return df
 
 def pre_award(df):
