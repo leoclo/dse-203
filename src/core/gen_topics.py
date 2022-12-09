@@ -56,16 +56,20 @@ class gen_topics():
         total_topics = int(data_df.shape[0]/batch_size) - 1
         self.df_mtopics = pd.DataFrame(columns=['movie_id', 'topic'])
 
-        for k in range(total_topics):
-            df_movie_slice = data_df.iloc[k*batch_size:(k+1)*batch_size]
-            if(not df_movie_slice.empty):
-                df_movie_topics = self.make_topics(df_movie_slice, num_topics=num_topics_per_batch)
-                df_movie_topics['topic'] = df_movie_topics['topic'] + k*num_topics_per_batch
-                self.df_mtopics = pd.concat( [self.df_mtopics, df_movie_topics[['movie_id', 'topic']]], axis=0)
-                if (k ==0):
-                    self.df_topic_words = pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])
-                else:
-                    self.df_topic_words = pd.concat( [self.df_topic_words, pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])], axis=0 ) 
+        try:
+            for k in range(total_topics):
+                df_movie_slice = data_df.iloc[k*batch_size:(k+1)*batch_size]
+                if(not df_movie_slice.empty):
+                    df_movie_topics = self.make_topics(df_movie_slice, num_topics=num_topics_per_batch)
+                    df_movie_topics['topic'] = df_movie_topics['topic'] + k*num_topics_per_batch
+                    self.df_mtopics = pd.concat( [self.df_mtopics, df_movie_topics[['movie_id', 'topic']]], axis=0)
+                    if (k ==0):
+                        self.df_topic_words = pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])
+                    else:
+                        self.df_topic_words = pd.concat( [self.df_topic_words, pd.DataFrame( [ [ k.split("*")[1] for k in x[1].split(" + ") ] for x in self.lda_model.show_topics()])], axis=0 ) 
+        except:
+            print("Failed at k = "+str(k))
+            print(df_movie_slice)
 
         return (self.df_mtopics, self.df_topic_words)       
 
