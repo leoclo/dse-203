@@ -1,5 +1,5 @@
 import pandas as pd
-
+import random
 from .preprocessing import pre_directors, pre_cast, pre_movies
 
 def adjust_year(x):
@@ -8,7 +8,7 @@ def adjust_year(x):
     except:
         return None
 
-from .preprocessing import pre_directors, pre_cast, pre_movies, pre_award 
+from .preprocessing import pre_directors, pre_cast, pre_movies, pre_award
 from .director_jaccard import map_directors
 
 
@@ -22,6 +22,23 @@ class DataFrameTransform():
     def __getitem__(self, k):
         print(f'==== TRANSFORM {k} ====')
         return getattr(self, k)
+
+    def topics(self, df):
+        data = {
+            'topic_id': [],
+            'topics': []
+        }
+        for i, row in enumerate(df.to_dict('records')):
+            for j in range(0, 9):
+                data['topic_id'].append(i)
+                data['topics'].append([row[f'topic_{j}'].replace('"', '') for j in range(0, 9)])
+
+        self.dfs['topics'] = pd.DataFrame(data)
+        return self.dfs['topics']
+
+    def topics_movies(self, df):
+        self.dfs['topics_movies'] = df
+        return self.dfs['topics_movies']
 
     def awards_won(self, df):
         df['year'] = df['year'].apply(lambda x: adjust_year(x))
@@ -42,23 +59,20 @@ class DataFrameTransform():
 
     def movies(self, df):
         self.dfs['movies'] = pre_movies(df)
-        #
         return self.dfs['movies']
-
-    
 
     def award(df):
         df = pre_award(df)
-        
+
         award_to_dir = map_directors(self.dfs['directors']['name'], df)
         df = df[df['director_name'].isin(award_to_dir)]
-        
+
         new_df = df[['director_name','category','outcome','year']].groupby(['director_name','category','outcome'])['year'].unique().reset_index()
-        
+
         self.dfs['awards'] = new_df
-        
+
         return self.dfs['awards']
-    
+
     # In cast, merge with the other dataframes
     def cast(self, df):
         df = pre_cast(df)
@@ -84,9 +98,9 @@ class DataFrameTransform():
         }
         # filtering directors
         dir_to_cast, cast_to_dir = map_directors(self.dfs['directors'], df)
-        
+
         df = df[df['director_name'].isin(cast_to_dir)]
-        
+
         # Merge with movies
         df = pd.merge(df, self.dfs['movies'], how='left', left_on='movie_id', right_on='movie_id')
 
@@ -144,6 +158,7 @@ class DataFrameTransform():
         awards = awards.reset_index().rename(columns={'index': 'award_id'})
 
         dfs = {
+            'topics': self.dfs['topics'],
             'awards': awards,
             'company': pd.DataFrame(companies).drop_duplicates(subset='name'),
             'people': pd.DataFrame(people).drop_duplicates(subset='name'),
@@ -152,6 +167,8 @@ class DataFrameTransform():
         }
         dfs = append_award(dfs, self.dfs['awards_won'], k='awards_won')
         dfs = append_award(dfs, self.dfs['awards_nominated'], k='awards_nominated')
+        dfs = append_topics(dfs, self.dfs['topics_movies'])
+
         self.dfs = dfs
 
 
@@ -184,6 +201,16 @@ def append_award(dfs, df, k='awards_won'):
 
     return dfs
 
+
+def append_topics(dfs, df, k='awards_won'):
+    movies_topics = df.groupby('movie_id')['topic_id'].apply(
+        lambda x: [{'topic_id': v} for v in x ]
+    ).reset_index().rename(columns={'topic_id': 'topics'})
+
+    dfs['movies'] = pd.merge(dfs['movies'], movies_topics, how='left', on='movie_id')
+    dfs['movies']['topics'] = dfs['movies']['topics'].apply(lambda x: x if isinstance(x, list) else [])
+
+    return dfs
 
 
 

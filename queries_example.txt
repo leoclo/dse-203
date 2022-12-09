@@ -23,3 +23,12 @@ MATCH
 	(a:Person)-[:NOMINATED]-(aw:Award)
 WHERE  d.name='Roman Polanski'AND g.name = 'Drama'
 RETURN DISTINCT d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
+
+
+MATCH
+	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
+	(m:Movie)-[:HAS_GENRE]-(g:Genre),
+	(m:Movie)-[:HAS_TOPIC]-(t:Topic),
+	(a:Person)-[:NOMINATED]-(aw:Award)
+WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND t.topics CONTAINS 'Life'
+RETURN DISTINCT t.topic_name, d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name

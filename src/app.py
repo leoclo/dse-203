@@ -15,8 +15,9 @@ class App():
     def extract_transform(self):
         return core.extract_transform(self.settings)
 
-    def etl(self):
-        dfs = self.extract_transform()
+    def etl(self, dfs=None):
+        if dfs is None:
+            dfs = self.extract_transform()
         return core.load(self.graph4j, dfs, self.settings['load'])
 
 

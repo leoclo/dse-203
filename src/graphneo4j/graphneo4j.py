@@ -62,8 +62,7 @@ class GraphNeo4j():
         file_folder= 'src/files',
         clear_data=False
     ):
-        # self.uri = uri
-        # self.auth = (username, password)
+
         self.clear_data = clear_data
         self.insertion_mode = insertion_mode
         self.file_folder = file_folder
@@ -71,9 +70,10 @@ class GraphNeo4j():
         self.cap_insert = cap_insert
         self.driver = GraphDatabase.driver(uri, auth=(username, password))
         self.db = db
-        # self.gds = GraphDataScience(uri, auth=(username, password))
         self.res = []
         self.queries = []
+        if clear_data:
+            self.run_query('MATCH (n) DETACH DELETE n', {})
 
     def __getitem__(self, k):
         return getattr(self, k)
@@ -107,13 +107,6 @@ class GraphNeo4j():
         self.run_query(query, {})
 
     def df2neo4j(self, df, merges):
-        if self.clear_data:
-            try:
-                query = f'''MATCH (n:{node_name}) DELETE n'''
-                self.run_query(query, {})
-            except: pass
-
-
         merge_qry = write_merges(merges)
         if self.insertion_mode == 'csv_file':
             return self.df2neo4j_csv(df, merge_qry)

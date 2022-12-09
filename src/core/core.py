@@ -8,7 +8,7 @@ def extract_transform(settings):
     df_transform = DataFrameTransform()
 
     if settings['crawler']['on']:
-        crawler_award()
+        crawler_award(settings)
 
     for k, meta in settings['transform'].items():
 
@@ -48,6 +48,6 @@ def crawler_award(settings):
         print(f'=========  Crwaler {k} ========')
         print(df.info())
         print(f'========= end ========')
-        df.to_csv(f'src/files/{k}.csv')
+        df.to_csv(f'src/files/archive/{k}.csv')
 
     return True

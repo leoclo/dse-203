@@ -1,5 +1,5 @@
-# import requests
-# from bs4 import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
 
 AWARD_COLS = ['award_company', 'award_type', 'movie', 'person', 'year']
 AWARD_LIST = [
