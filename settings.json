@@ -64,10 +64,15 @@
                 "id": "movie_id",
                 "imdb_id": "imdb_id",
                 "original_language": "lang",
-                "original_title": "title",
+                "title": "title",
                 "overview": "overview",
                 "genres": "genres",
-                "production_companies": "company"
+                "production_companies": "company",
+                "vote_average": "vote_average",
+                "vote_count": "vote_count",
+                "budget": "budget",
+                "revenue": "revenue",
+                "runtime": "runtime"
             }
         },
         "cast": {
@@ -279,10 +284,12 @@
                             "name": "NOMINATED",
                             "ends_dir": "->",
                             "ends": "aw"
+
                         }
                     ]
                 },
                 {
+
                     "unwind": "awards_nominated",
                     "needs": "m",
                     "ref": "an",
@@ -300,5 +307,6 @@
                 }
         	]
     	}
+
     }
 }

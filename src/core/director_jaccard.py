@@ -1,4 +1,6 @@
 import py_stringmatching as sm
+import numpy as np
+import pandas as pd
 
 # create a Jaccard similarity measure object
 jac = sm.Jaccard()
@@ -41,18 +43,18 @@ def jac_trans(string1, string_arr, thres):
     return None
 
 # Creates a dictionary to map a dataframe's director names to the names in the acclaimed directors file
-def mapDirectors(dir_df, to_df, other_name = "director_name"):
+def map_directors(dir_df, to_df, other_name = "director_name"):
     dir_names = dir_df["name"]
     other_names = to_df[other_name].unique()
     
-    dir_map = {}
+    dir_map_o2d = {}
+    dir_map_d2o = {}
     
     for name in dir_names:
         # Perform a jaccard similarity score test and put it in the map if it pases
         trans = jac_trans(name, other_names, 0.8)
         if trans is not None:
-            dir_map[trans] = name
+            dir_map_o2d[trans] = name
+            dir_map_d2o[name] = trans
     
-    print("Names given:",len(dir_names), "; Names used:", len(dir_map)) 
-    
-    return dir_map
+    return dir_map_d2o, dir_map_o2d,
