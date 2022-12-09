@@ -1,6 +1,16 @@
 import pandas as pd
-from .preprocessing import pre_directors, pre_cast, pre_movies, pre_award
+
+from .preprocessing import pre_directors, pre_cast, pre_movies
+
+def adjust_year(x):
+    try:
+        return int(x[0:4])
+    except:
+        return None
+
+from .preprocessing import pre_directors, pre_cast, pre_movies, pre_award 
 from .director_jaccard import map_directors
+
 
 class DataFrameTransform():
     """Use to create specific dataframe transformations"""
@@ -12,6 +22,18 @@ class DataFrameTransform():
     def __getitem__(self, k):
         print(f'==== TRANSFORM {k} ====')
         return getattr(self, k)
+
+    def awards_won(self, df):
+        df['year'] = df['year'].apply(lambda x: adjust_year(x))
+        df = df[df['year'].apply(lambda x: False if pd.isnull(x) else True)]
+        self.dfs['awards_won'] = df
+        return self.dfs['awards_won']
+
+    def awards_nominated(self, df):
+        df['year'] = df['year'].apply(lambda x: adjust_year(x))
+        df = df[df['year'].apply(lambda x: False if pd.isnull(x) else True)]
+        self.dfs['awards_nominated'] = df
+        return self.dfs['awards_nominated']
 
     def directors(self, df):
         # df = df[df['acad_fellow'] > 0].dropna()
@@ -116,10 +138,52 @@ class DataFrameTransform():
             companies.append(company)
             final_df_data['companies'].append([company])
 
-        self.dfs = {
+
+        awards = pd.concat([self.dfs['awards_won'], self.dfs['awards_nominated']])
+        awards = awards[['award_company', 'award_type', 'year']].drop_duplicates()
+        awards = awards.reset_index().rename(columns={'index': 'award_id'})
+
+        dfs = {
+            'awards': awards,
             'company': pd.DataFrame(companies).drop_duplicates(subset='name'),
             'people': pd.DataFrame(people).drop_duplicates(subset='name'),
             'genres': pd.DataFrame(genres).drop_duplicates(),
-            'movies': pd.DataFrame(final_df_data)
+            'movies': pd.DataFrame(final_df_data),
         }
+        dfs = append_award(dfs, self.dfs['awards_won'], k='awards_won')
+        dfs = append_award(dfs, self.dfs['awards_nominated'], k='awards_nominated')
+        self.dfs = dfs
+
+
+def append_award(dfs, df, k='awards_won'):
+
+    #unifying ids
+    new_df_data = []
+    cols = ['award_company', 'award_type', 'year']
+    df = pd.merge(df, dfs['awards'], how='left', left_on=cols, right_on=cols)
+
+    #creating movies [award_list]
+    u_movies = dfs['movies'][['movie_id', 'title']].drop_duplicates(subset='title')
+    df = df[df['movie'].isin(u_movies['title'])]
+
+    df = pd.merge(df, u_movies, how='left', left_on='movie', right_on='title')
+    movies_awards = df.groupby('movie_id')['award_id'].apply(
+        lambda x: [{'award_id': v} for v in x ]
+    ).reset_index().rename(columns={'award_id':k})
+
+    dfs['movies'] = pd.merge(dfs['movies'], movies_awards, how='left', on='movie_id')
+    dfs['movies'][k] = dfs['movies'][k].apply(lambda x: x if isinstance(x, list) else [])
+
+    df = df[df['person'].isin(dfs['people']['name'])]
+    people_awards = df.groupby('person')['award_id'].apply(
+        lambda x: [{'award_id': v} for v in x ]
+    ).reset_index().rename(columns={'award_id':k, 'person': 'name'})
+
+    dfs['people'] = pd.merge(dfs['people'], people_awards, how='left', on='name')
+    dfs['people'][k] = dfs['people'][k].apply(lambda x: x if isinstance(x, list) else [])
+
+    return dfs
+
+
+
 

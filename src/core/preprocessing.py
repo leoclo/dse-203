@@ -14,8 +14,6 @@ def pre_directors(df):
     return df
 
 def pre_movies(df):
-    
-    
     return df
 
 def pre_cast(df):
@@ -26,10 +24,7 @@ def pre_cast(df):
     df = standardize(df, 'actor3_name')
     df = standardize(df, 'actor4_name')
     df = standardize(df, 'actor5_name')
-    #df = standardize(df, 'producer_name')
-    #df = standardize(df, 'screeplay_name')
-    #df = standardize(df, 'editor_name')
-    
+
     return df
 
 def pre_award(df):
