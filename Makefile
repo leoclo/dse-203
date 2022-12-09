@@ -1,11 +1,15 @@
 run:
 	docker-compose up -d
 
+deps:
+	python3 -m spacy download en
+
 clean:
 	rm -f *~
 	rm -f .*~
 	rm -f \#*
 	rm -f .\#*
+	find -iname "__pycache__" | xargs rm -rf
 
 nuke:
 	rm -rf ./conf
