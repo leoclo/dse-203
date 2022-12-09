@@ -1,312 +1,399 @@
 {
-    "neo4j": {
-        "uri": "bolt://localhost:7687",
-        "username": "neo4j",
-        "password": "1234",
-        "db": null,
-        "file_folder": "/import/",
-        "insertion_mode": "rows",
-        "clear_data": true,
-        "cap_insert": 50000
+  "neo4j": {
+    "uri": "bolt://localhost:7687",
+    "username": "neo4j",
+    "password": "1234",
+    "db": null,
+    "file_folder": "/import/",
+    "insertion_mode": "rows",
+    "clear_data": true,
+    "cap_insert": 70000
+  },
+  "crawler": {
+    "on": false
+  },
+  "extract": {
+    "topics": {
+      "filepath_or_buffer": "src/files/archive/topic_words.csv",
+      "sep": ","
     },
-    "crawler":{
-        "on": false
+    "topics_movies": {
+      "filepath_or_buffer": "src/files/archive/movie_topic_ids.csv",
+      "sep": ","
     },
-    "extract": {
-        "awards_won": {
-            "filepath_or_buffer": "src/files/award_won.csv",
-            "sep": ","
-        },
-        "awards_nominated":{
-            "filepath_or_buffer": "src/files/award_nominated.csv",
-            "sep": ","
-        },
-        "directors": {
-            "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
-            "sep": ";"
-        },
-        "movies": {
-            "filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
-            "sep": ";"
-        },
-        "cast": {
-            "filepath_or_buffer": "src/files/archive/AllMoviesCastingRaw.csv",
-            "sep": ";"
-        }
+    "awards_won": {
+      "filepath_or_buffer": "src/files/archive/award_won.csv",
+      "sep": ","
     },
-    "transform": {
-        "awards_won": {
-            "column_map": {
-                "award_company": "award_company",
-                "award_type": "award_type",
-                "movie": "movie",
-                "person": "person",
-                "year": "year"
-            }
-        },
-        "awards_nominated":{
-            "column_map": {
-                "award_company": "award_company",
-                "award_type": "award_type",
-                "movie": "movie",
-                "person": "person",
-                "year": "year"
-            }
-        },
-        "directors": {
-            "column_map": {
-                "name": "name",
-                "Academy Fellowship": "acad_fellow"
-            }
-        },
-        "movies": {
-            "column_map": {
-                "id": "movie_id",
-                "imdb_id": "imdb_id",
-                "original_language": "lang",
-                "title": "title",
-                "overview": "overview",
-                "genres": "genres",
-                "production_companies": "company",
-                "vote_average": "vote_average",
-                "vote_count": "vote_count",
-                "budget": "budget",
-                "revenue": "revenue",
-                "runtime": "runtime"
-            }
-        },
-        "cast": {
-            "column_map": {
-                "id": "movie_id",
-                "actor1_name": "actor1_name",
-                "actor1_gender": "actor1_gender",
-                "actor2_name": "actor2_name",
-                "actor2_gender": "actor2_gender",
-                "actor3_name": "actor3_name",
-                "actor3_gender": "actor3_gender",
-                "actor4_name": "actor4_name",
-                "actor4_gender": "actor4_gender",
-                "actor5_name": "actor5_name",
-                "actor5_gender": "actor5_gender",
-                "director_name": "director_name",
-                "director_gender": "director_gender"
-            }
-        }
+    "awards_nominated": {
+      "filepath_or_buffer": "src/files/archive/award_nominated.csv",
+      "sep": ","
     },
-    "load": {
-        "constraints": [
-            {
-                "name": "Awards",
-                "node_name": "Award",
-                "field": "award_id"
-            },
-            {
-                "name": "Companies",
-                "node_name": "Company",
-                "field": "name"
-            },
-            {
-                "name": "Genres",
-                "node_name": "Genre",
-                "field": "name"
-            },
-            {
-                "name": "People",
-                "node_name": "Person",
-                "field": "name"
-            },
-            {
-                "name": "Movies",
-                "node_name": "Movie",
-                "field": "movie_id"
-            }
-        ],
-        "data":{
-            "awards":[{
-                "ref": "aw",
-                "node_name": "Award",
-                "cols": [
-                    "award_id",
-                    "award_company",
-                    "award_type",
-                    "year"
-                ]
-            }],
-            "company": [{
-                "ref": "c",
-                "node_name": "Company",
-                "cols": ["name"]
-            }],
-        	"people": [
-                {
-            		"ref": "p",
-            		"node_name": "Person",
-            		"cols": ["name", "gender"]
-            	},
-                {
-                    "unwind": "awards_won",
-                    "needs": "p",
-                    "ref": "aw",
-                    "node_name": "Award",
-                    "cols": ["award_id"],
-                    "relations": [
-                        {
-                            "begins": "p",
-                            "begins_dir": "-",
-                            "name": "WON",
-                            "ends_dir": "->",
-                            "ends": "aw"
-                        },
-                        {
-                            "begins": "p",
-                            "begins_dir": "-",
-                            "name": "NOMINATED",
-                            "ends_dir": "->",
-                            "ends": "aw"
-                        }
-                    ]
-                },
-                {
-                    "unwind": "awards_nominated",
-                    "needs": "p",
-                    "ref": "an",
-                    "node_name": "Award",
-                    "cols": ["award_id"],
-                    "relations": [
-                        {
-                            "begins": "p",
-                            "begins_dir": "-",
-                            "name": "NOMINATED",
-                            "ends_dir": "->",
-                            "ends": "an"
-                        }
-                    ]
-                }
-            ],
-        	"genres": [{
-        		"ref": "g",
-        		"node_name": "Genre",
-        		"cols": ["name"]
-        	}],
-        	"movies": [
-	            {
-	                "ref": "m",
-	                "node_name": "Movie",
-	                "cols": [
-	                    "movie_id",
-	                    "imdb_id",
-	                    "lang",
-	                    "title",
-	                    "overview"
-	                ]
-	            },
-	            {
-	            	"unwind": "directors",
-	            	"needs": "m",
-	                "ref": "d",
-	                "node_name": "Person",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "d",
-	                        "begins_dir": "-",
-	                        "name": "DIRECTED",
-	                        "ends_dir": "->",
-	                        "ends": "m"
-	                    }
-	                ]
-	            },
-                {
-                    "unwind": "companies",
-                    "needs": "m",
-                    "ref": "c",
-                    "node_name": "Company",
-                    "cols": ["name"],
-                    "relations": [
-                        {
-                            "begins": "c",
-                            "begins_dir": "-",
-                            "name": "PRODUCED",
-                            "ends_dir": "->",
-                            "ends": "m"
-                        }
-                    ]
-                },
-	            {
-	                "unwind": "genres",
-	                "needs": "m",
-	                "ref": "g",
-	                "node_name": "Genre",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "m",
-	                        "begins_dir": "-",
-	                        "name": "HAS_GENRE",
-	                        "ends": "g",
-	                        "ends_dir": "->"
-	                    }
-	                ]
-	            },
-	            {
-	                "unwind": "actors",
-	                "needs": "m",
-	                "ref": "a",
-	                "node_name": "Person",
-	                "cols": ["name"],
-	                "relations": [
-	                    {
-	                        "begins": "a",
-	                        "begins_dir": "-",
-	                        "name": "ACTED_IN",
-	                        "ends_dir": "->",
-	                        "ends": "m"
-	                    }
-	                ]
-	            },
-                {
-                    "unwind": "awards_won",
-                    "needs": "m",
-                    "ref": "aw",
-                    "node_name": "Award",
-                    "cols": ["award_id"],
-                    "relations": [
-                        {
-                            "begins": "m",
-                            "begins_dir": "-",
-                            "name": "WON",
-                            "ends_dir": "->",
-                            "ends": "aw"
-                        },
-                        {
-                            "begins": "m",
-                            "begins_dir": "-",
-                            "name": "NOMINATED",
-                            "ends_dir": "->",
-                            "ends": "aw"
-
-                        }
-                    ]
-                },
-                {
-
-                    "unwind": "awards_nominated",
-                    "needs": "m",
-                    "ref": "an",
-                    "node_name": "Award",
-                    "cols": ["award_id"],
-                    "relations": [
-                        {
-                            "begins": "m",
-                            "begins_dir": "-",
-                            "name": "NOMINATED",
-                            "ends_dir": "->",
-                            "ends": "an"
-                        }
-                    ]
-                }
-        	]
-    	}
-
+    "directors": {
+      "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
+      "sep": ";"
+    },
+    "movies": {
+      "filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
+      "sep": ";"
+    },
+    "cast": {
+      "filepath_or_buffer": "src/files/archive/AllMoviesCastingRaw.csv",
+      "sep": ";"
     }
+  },
+  "transform": {
+    "topics": {
+      "column_map": {
+        "0": "topic_0",
+        "1": "topic_1",
+        "2": "topic_2",
+        "3": "topic_3",
+        "4": "topic_4",
+        "5": "topic_5",
+        "6": "topic_6",
+        "7": "topic_7",
+        "8": "topic_8",
+        "9": "topic_9"
+      }
+    },
+    "topics_movies": {
+      "column_map": {
+        "movie_id": "movie_id",
+        "topic": "topic_id"
+      }
+    },
+    "awards_won": {
+      "column_map": {
+        "award_company": "award_company",
+        "award_type": "award_type",
+        "movie": "movie",
+        "person": "person",
+        "year": "year"
+      }
+    },
+    "awards_nominated": {
+      "column_map": {
+        "award_company": "award_company",
+        "award_type": "award_type",
+        "movie": "movie",
+        "person": "person",
+        "year": "year"
+      }
+    },
+    "directors": {
+      "column_map": {
+        "name": "name",
+        "Academy Fellowship": "acad_fellow"
+      }
+    },
+    "movies": {
+      "column_map": {
+        "id": "movie_id",
+        "imdb_id": "imdb_id",
+        "original_language": "lang",
+        "title": "title",
+        "overview": "overview",
+        "genres": "genres",
+        "production_companies": "company",
+        "vote_average": "vote_average",
+        "vote_count": "vote_count",
+        "budget": "budget",
+        "revenue": "revenue",
+        "runtime": "runtime"
+      }
+    },
+    "cast": {
+      "column_map": {
+        "id": "movie_id",
+        "actor1_name": "actor1_name",
+        "actor1_gender": "actor1_gender",
+        "actor2_name": "actor2_name",
+        "actor2_gender": "actor2_gender",
+        "actor3_name": "actor3_name",
+        "actor3_gender": "actor3_gender",
+        "actor4_name": "actor4_name",
+        "actor4_gender": "actor4_gender",
+        "actor5_name": "actor5_name",
+        "actor5_gender": "actor5_gender",
+        "director_name": "director_name",
+        "director_gender": "director_gender"
+      }
+    }
+  },
+  "load": {
+    "constraints": [
+      {
+        "name": "Topics",
+        "node_name": "Topic",
+        "field": "id"
+      },
+      {
+        "name": "Awards",
+        "node_name": "Award",
+        "field": "award_id"
+      },
+      {
+        "name": "Companies",
+        "node_name": "Company",
+        "field": "name"
+      },
+      {
+        "name": "Genres",
+        "node_name": "Genre",
+        "field": "name"
+      },
+      {
+        "name": "People",
+        "node_name": "Person",
+        "field": "name"
+      },
+      {
+        "name": "Movies",
+        "node_name": "Movie",
+        "field": "movie_id"
+      }
+    ],
+    "data": {
+      "topics": [
+        {
+          "ref": "t",
+          "node_name": "Topic",
+          "cols": [
+            "topic_id",
+            "topics"
+          ]
+        }
+      ],
+      "awards": [
+        {
+          "ref": "aw",
+          "node_name": "Award",
+          "cols": [
+            "award_id",
+            "award_company",
+            "award_type",
+            "year"
+          ]
+        }
+      ],
+      "company": [
+        {
+          "ref": "c",
+          "node_name": "Company",
+          "cols": [
+            "name"
+          ]
+        }
+      ],
+      "people": [
+        {
+          "ref": "p",
+          "node_name": "Person",
+          "cols": [
+            "name",
+            "gender"
+          ]
+        },
+        {
+          "unwind": "awards_won",
+          "needs": "p",
+          "ref": "aw",
+          "node_name": "Award",
+          "cols": [
+            "award_id"
+          ],
+          "relations": [
+            {
+              "begins": "p",
+              "begins_dir": "-",
+              "name": "WON",
+              "ends_dir": "->",
+              "ends": "aw"
+            },
+            {
+              "begins": "p",
+              "begins_dir": "-",
+              "name": "NOMINATED",
+              "ends_dir": "->",
+              "ends": "aw"
+            }
+          ]
+        },
+        {
+          "unwind": "awards_nominated",
+          "needs": "p",
+          "ref": "an",
+          "node_name": "Award",
+          "cols": [
+            "award_id"
+          ],
+          "relations": [
+            {
+              "begins": "p",
+              "begins_dir": "-",
+              "name": "NOMINATED",
+              "ends_dir": "->",
+              "ends": "an"
+            }
+          ]
+        }
+      ],
+      "genres": [
+        {
+          "ref": "g",
+          "node_name": "Genre",
+          "cols": [
+            "name"
+          ]
+        }
+      ],
+      "movies": [
+        {
+          "ref": "m",
+          "node_name": "Movie",
+          "cols": [
+            "movie_id",
+            "imdb_id",
+            "lang",
+            "title",
+            "overview"
+          ]
+        },
+        {
+          "unwind": "directors",
+          "needs": "m",
+          "ref": "d",
+          "node_name": "Person",
+          "cols": [
+            "name"
+          ],
+          "relations": [
+            {
+              "begins": "d",
+              "begins_dir": "-",
+              "name": "DIRECTED",
+              "ends_dir": "->",
+              "ends": "m"
+            }
+          ]
+        },
+        {
+          "unwind": "companies",
+          "needs": "m",
+          "ref": "c",
+          "node_name": "Company",
+          "cols": [
+            "name"
+          ],
+          "relations": [
+            {
+              "begins": "c",
+              "begins_dir": "-",
+              "name": "PRODUCED",
+              "ends_dir": "->",
+              "ends": "m"
+            }
+          ]
+        },
+        {
+          "unwind": "genres",
+          "needs": "m",
+          "ref": "g",
+          "node_name": "Genre",
+          "cols": [
+            "name"
+          ],
+          "relations": [
+            {
+              "begins": "m",
+              "begins_dir": "-",
+              "name": "HAS_GENRE",
+              "ends": "g",
+              "ends_dir": "->"
+            }
+          ]
+        },
+        {
+          "unwind": "actors",
+          "needs": "m",
+          "ref": "a",
+          "node_name": "Person",
+          "cols": [
+            "name"
+          ],
+          "relations": [
+            {
+              "begins": "a",
+              "begins_dir": "-",
+              "name": "ACTED_IN",
+              "ends_dir": "->",
+              "ends": "m"
+            }
+          ]
+        },
+        {
+          "unwind": "awards_won",
+          "needs": "m",
+          "ref": "aw",
+          "node_name": "Award",
+          "cols": [
+            "award_id"
+          ],
+          "relations": [
+            {
+              "begins": "m",
+              "begins_dir": "-",
+              "name": "WON",
+              "ends_dir": "->",
+              "ends": "aw"
+            },
+            {
+              "begins": "m",
+              "begins_dir": "-",
+              "name": "NOMINATED",
+              "ends_dir": "->",
+              "ends": "aw"
+            }
+          ]
+        },
+        {
+          "unwind": "awards_nominated",
+          "needs": "m",
+          "ref": "an",
+          "node_name": "Award",
+          "cols": [
+            "award_id"
+          ],
+          "relations": [
+            {
+              "begins": "m",
+              "begins_dir": "-",
+              "name": "NOMINATED",
+              "ends_dir": "->",
+              "ends": "an"
+            }
+          ]
+        },
+        {
+          "unwind": "topics",
+          "needs": "m",
+          "ref": "t",
+          "node_name": "Topic",
+          "cols": [
+            "topic_id"
+          ],
+          "relations": [
+            {
+              "begins": "m",
+              "begins_dir": "-",
+              "name": "HAS_TOPIC",
+              "ends_dir": "->",
+              "ends": "t"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }

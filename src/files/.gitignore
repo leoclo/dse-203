@@ -1,4 +1,6 @@
 # Ignore everything in this directory
 *
 # Except this file
+!*award_nominated.csv
+!*award_won.csv
 !.gitignore
