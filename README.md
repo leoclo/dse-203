@@ -115,3 +115,89 @@ using app modules
   - Years (Int[])
 - Nominated (Person->Award)
   - Years (Int[])
+
+# Interesting Queries
+
+### Reorganize topics into keywords. Reaches outside of the slices the topics were made
+
+```
+MATCH (t:Topic)<-[]-(m:Movie) UNWIND(t.topics) as keyword
+MERGE (k:Keyword {keyword: keyword})
+MERGE (k)<-[:HAS_KEYWORD]-(m)
+
+```
+
+### Most number of keywords used by movies
+
+```
+MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic)
+UNWIND t.topics as t_topics
+RETURN DISTINCT t_topics, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC
+
+OR (With merge)
+
+# Most number of keywords used by movies
+MATCH (m:Movie)-[:HAS_KEYWORD]-(k:Keyword)
+RETURN k, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC
+
+```
+
+### Keywords that were most nominated for awards
+
+```
+MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic),
+      (m:Movie)-[:NOMINATED]-(a:Award)
+UNWIND t.topics as t_topics
+RETURN DISTINCT t_topics, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC
+
+OR (With merge)
+
+MATCH (m:Movie)-[:HAS_KEYWORD]-(k:Keyword),
+      (m:Movie)-[:NOMINATED]-(a:Award)
+RETURN k, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC
+
+```
+
+### Misc
+
+```
+MATCH (a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person), (m:Movie)-[:HAS_GENRE]-(g:Genre)
+WHERE d.name='Quentin Tarantino' AND g.name = 'Comedy'
+RETURN DISTINCT a.name, m.title
+
+MATCH (m:Movie)-[:PRODUCED]-(c:Company)
+WHERE c.name='Vía Digital'
+RETURN DISTINCT m.title
+
+MATCH (a:Person)-[:NOMINATED]-(aw:Award), (a:Person)-[:ACTED_IN]-(m:Movie)
+RETURN DISTINCT a.name, aw.year, aw.award_company, aw.award_type, m.title
+
+
+MATCH
+	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
+	(m:Movie)-[:HAS_GENRE]-(g:Genre),
+	(a:Person)-[:NOMINATED]-(aw:Award)
+WHERE d.name='Quentin Tarantino' AND g.name = 'Action'
+RETURN DISTINCT a.name, m.title, aw.award_company, aw.award_type
+
+MATCH
+	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
+	(m:Movie)-[:HAS_GENRE]-(g:Genre),
+	(a:Person)-[:NOMINATED]-(aw:Award)
+WHERE  d.name='Roman Polanski'AND g.name = 'Drama'
+RETURN DISTINCT d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
+
+
+MATCH
+	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
+	(m:Movie)-[:HAS_GENRE]-(g:Genre),
+	(m:Movie)-[:HAS_TOPIC]-(t:Topic),
+	(a:Person)-[:NOMINATED]-(aw:Award)
+WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND any(x IN t.topics WHERE x IN ['spacecraft'])
+RETURN DISTINCT t.topics, d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
+
+```
