@@ -76,11 +76,6 @@ Note:
 There is a notebook in root folder called app.ipynb that can also be used for
 using app modules
 
-## Wikipedia/DBPedia data points
-
-- Movies
-- Directors
-
 ## Questions
 
 - Which directors have the most of awards in a genre ?
@@ -93,12 +88,6 @@ using app modules
   - Give the top 10 actors by # of finds for that specific actor.
 - Which actors work ONLY with directors who won 1 award or less.
 
-## Tasks
-
-- [ ] Need to find directors from a given movie name (All movies details cleaned dataset)
-  - Use movie titles, search via wikipedia or dbpedia for the movie director. Try to get tmbd/imbdb ID so we can easily match entites.
-- [ ] Join together relationship
-
 ## Nodes
 
 - Person
@@ -106,8 +95,8 @@ using app modules
 - Movie
   - Language (String)
   - Production Country (String)
-  - Genre  (String)
-  - Title  (String)
+  - Genre (String)
+  - Title (String)
   - tmbdID (String)
   - imdbID (String)
   - budget (int)
