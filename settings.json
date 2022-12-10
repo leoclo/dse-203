@@ -10,7 +10,7 @@
     "cap_insert": 70000
   },
   "crawler": {
-    "on": false
+    "on": true
   },
   "extract": {
     "topics": {
@@ -159,50 +159,35 @@
         {
           "ref": "t",
           "node_name": "Topic",
-          "cols": [
-            "topic_id",
-            "topics"
-          ]
+          "cols": ["topic_id", "topics"]
         }
       ],
       "awards": [
         {
           "ref": "aw",
           "node_name": "Award",
-          "cols": [
-            "award_id",
-            "award_company",
-            "award_type",
-            "year"
-          ]
+          "cols": ["award_id", "award_company", "award_type", "year"]
         }
       ],
       "company": [
         {
           "ref": "c",
           "node_name": "Company",
-          "cols": [
-            "name"
-          ]
+          "cols": ["name"]
         }
       ],
       "people": [
         {
           "ref": "p",
           "node_name": "Person",
-          "cols": [
-            "name",
-            "gender"
-          ]
+          "cols": ["name", "gender"]
         },
         {
           "unwind": "awards_won",
           "needs": "p",
           "ref": "aw",
           "node_name": "Award",
-          "cols": [
-            "award_id"
-          ],
+          "cols": ["award_id"],
           "relations": [
             {
               "begins": "p",
@@ -225,9 +210,7 @@
           "needs": "p",
           "ref": "an",
           "node_name": "Award",
-          "cols": [
-            "award_id"
-          ],
+          "cols": ["award_id"],
           "relations": [
             {
               "begins": "p",
@@ -243,31 +226,21 @@
         {
           "ref": "g",
           "node_name": "Genre",
-          "cols": [
-            "name"
-          ]
+          "cols": ["name"]
         }
       ],
       "movies": [
         {
           "ref": "m",
           "node_name": "Movie",
-          "cols": [
-            "movie_id",
-            "imdb_id",
-            "lang",
-            "title",
-            "overview"
-          ]
+          "cols": ["movie_id", "imdb_id", "lang", "title", "overview"]
         },
         {
           "unwind": "directors",
           "needs": "m",
           "ref": "d",
           "node_name": "Person",
-          "cols": [
-            "name"
-          ],
+          "cols": ["name"],
           "relations": [
             {
               "begins": "d",
@@ -283,9 +256,7 @@
           "needs": "m",
           "ref": "c",
           "node_name": "Company",
-          "cols": [
-            "name"
-          ],
+          "cols": ["name"],
           "relations": [
             {
               "begins": "c",
@@ -301,9 +272,7 @@
           "needs": "m",
           "ref": "g",
           "node_name": "Genre",
-          "cols": [
-            "name"
-          ],
+          "cols": ["name"],
           "relations": [
             {
               "begins": "m",
@@ -319,9 +288,7 @@
           "needs": "m",
           "ref": "a",
           "node_name": "Person",
-          "cols": [
-            "name"
-          ],
+          "cols": ["name"],
           "relations": [
             {
               "begins": "a",
@@ -337,9 +304,7 @@
           "needs": "m",
           "ref": "aw",
           "node_name": "Award",
-          "cols": [
-            "award_id"
-          ],
+          "cols": ["award_id"],
           "relations": [
             {
               "begins": "m",
@@ -362,9 +327,7 @@
           "needs": "m",
           "ref": "an",
           "node_name": "Award",
-          "cols": [
-            "award_id"
-          ],
+          "cols": ["award_id"],
           "relations": [
             {
               "begins": "m",
@@ -380,9 +343,7 @@
           "needs": "m",
           "ref": "t",
           "node_name": "Topic",
-          "cols": [
-            "topic_id"
-          ],
+          "cols": ["topic_id"],
           "relations": [
             {
               "begins": "m",

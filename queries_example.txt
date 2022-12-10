@@ -33,5 +33,15 @@ MATCH
 WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND any(x IN t.topics WHERE x IN ['spacecraft'])
 RETURN DISTINCT t.topics, d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
 
+# Most number of keywords used by movies
+MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic) 
+UNWIND t.topics as t_topics
+RETURN DISTINCT t_topics, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC
 
-
+# keywords that were most nominated for awards
+MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic),
+      (m:Movie)-[:NOMINATED]-(a:Award)
+UNWIND t.topics as t_topics
+RETURN DISTINCT t_topics, COUNT(m) as amt_movies
+ORDER BY amt_movies DESC

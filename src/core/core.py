@@ -48,6 +48,6 @@ def crawler_award(settings):
         print(f'=========  Crwaler {k} ========')
         print(df.info())
         print(f'========= end ========')
-        df.to_csv(f'src/files/archive/{k}.csv')
+        df.to_csv(f'./files/archive/{k}.csv')
 
     return True
