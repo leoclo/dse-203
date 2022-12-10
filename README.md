@@ -91,30 +91,39 @@ using app modules
 ## Nodes
 
 - Person
-  - Name (String)
+  - name (string)
+  - gender (int)
 - Movie
-  - Language (String)
-  - Production Country (String)
-  - Genre (String)
-  - Title (String)
-  - tmbdID (String)
-  - imdbID (String)
-  - budget (int)
-  - popularity (float)
+  - movie_id (int)
+  - lang (string)
+  - title (string)
+  - imdbID (string)
+  - overview (string)
 - Award
-  - Name (String)
-- Production Company
-  - Name (string)
+  - award_id (string)
+  - award_comany (string)
+  - award_type (string)
+  - award_year (int)
+- Company
+  - name (string)
+- Genre
+  - name (string)
+- Topic (temporary)
+  - topic_id (int)
+  - topics (String[])
+- Keyword
+  - keyword (string)
 
 ## Relationships
 
-- Directed (Person->Movie)
-- Produced (Production Compnay->Movie)
-- Acted_In (Person->Movie)
-- Won (Person->Award)
-  - Years (Int[])
-- Nominated (Person->Award)
-  - Years (Int[])
+- DIRECTED (Person->Movie)
+- PRODUCED (Compnay->Movie)
+- ACTED_IN (Person->Movie)
+- ACTED_IN (Person->Award)
+- NOMINATED (Person->Award)
+- HAS_GENRE (Movie->Genre)
+- HAS_TOPIC (Movie->Topic)
+- HAS_KEYWORD(Movie->Keyword)
 
 # Interesting Queries
 
@@ -124,20 +133,12 @@ using app modules
 MATCH (t:Topic)<-[]-(m:Movie) UNWIND(t.topics) as keyword
 MERGE (k:Keyword {keyword: keyword})
 MERGE (k)<-[:HAS_KEYWORD]-(m)
-
+DETACH DELETE t
 ```
 
 ### Most number of keywords used by movies
 
 ```
-MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic)
-UNWIND t.topics as t_topics
-RETURN DISTINCT t_topics, COUNT(m) as amt_movies
-ORDER BY amt_movies DESC
-
-OR (With merge)
-
-# Most number of keywords used by movies
 MATCH (m:Movie)-[:HAS_KEYWORD]-(k:Keyword)
 RETURN k, COUNT(m) as amt_movies
 ORDER BY amt_movies DESC
@@ -147,14 +148,6 @@ ORDER BY amt_movies DESC
 ### Keywords that were most nominated for awards
 
 ```
-MATCH (m:Movie)-[:HAS_TOPIC]-(t:Topic),
-      (m:Movie)-[:NOMINATED]-(a:Award)
-UNWIND t.topics as t_topics
-RETURN DISTINCT t_topics, COUNT(m) as amt_movies
-ORDER BY amt_movies DESC
-
-OR (With merge)
-
 MATCH (m:Movie)-[:HAS_KEYWORD]-(k:Keyword),
       (m:Movie)-[:NOMINATED]-(a:Award)
 RETURN k, COUNT(m) as amt_movies
