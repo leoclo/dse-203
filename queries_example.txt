@@ -66,3 +66,17 @@ MATCH (m:Movie)-[:HAS_KEYWORD]-(k:Keyword),
       (m:Movie)-[:NOMINATED]-(a:Award)
 RETURN k, COUNT(m) as amt_movies
 ORDER BY amt_movies DESC
+
+# Determine frequency of keywords and records in relating to movies that win awards
+MATCH (k:Keyword)--(m:Movie)-[:WON]-(a:Award) return k.keyword, COUNT(*) as won ORDER BY won DESC
+
+OR 
+
+MATCH (k:Topic)--(m:Movie)-[:WON]-(a:Award) return k.topics, COUNT(*) as won ORDER BY won DESC
+
+# Find the most mutally networked actors that have not worked together in the given movies
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:Person)
+WHERE a.name < c.name
+WITH a, c, COUNT(*) AS network
+WHERE NOT (a)--(:Movie)--(c)
+RETURN a.name, c.name, network ORDER BY network DESC LIMIT 10
