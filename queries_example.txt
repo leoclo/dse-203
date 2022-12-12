@@ -74,9 +74,35 @@ OR
 
 MATCH (k:Topic)--(m:Movie)-[:WON]-(a:Award) return k.topics, COUNT(*) as won ORDER BY won DESC
 
+# Find top keywords in relation to the genre and the company
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Romance"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Comedy"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Warner Bros."}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Paramount Pictures"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+
 # Find the most mutally networked actors that have not worked together in the given movies
 MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:Person)
 WHERE a.name < c.name
 WITH a, c, COUNT(*) AS network
 WHERE NOT (a)--(:Movie)--(c)
 RETURN a.name, c.name, network ORDER BY network DESC LIMIT 10
+
+# Actors that have won awards in the same topic, but not previously worked together
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:Person),
+(a)-[:WON]->(w1:Award),
+(c)-[:WON]->(w2:Award)
+WHERE a.name < c.name AND w1.award_type = w2.award_type
+AND NOT (a)--(:Movie)--(c)
+RETURN DISTINCT a.name, c.name, w1.award_type
