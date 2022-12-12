@@ -170,19 +170,19 @@ Note: Since the keyword comes from the topic node, not the overview of the movie
 - What popular keywords does the romance genre turn up? Does it compare meaningfully from comedy? What about Warner Brothers company next to Paramount? Are the differing words informative enough that we can use keywords to differentiate the two?
 
 ```
-MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Romance"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Romance"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
 RETURN word
 ORDER BY present DESC LIMIT 10
 
-MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Comedy"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Comedy"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
 RETURN word
 ORDER BY present DESC LIMIT 10
 
-MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Warner Bros."}) with a.name AS genre, k.keyword AS word, COUNT() as present
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Warner Bros."}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
 RETURN word
 ORDER BY present DESC LIMIT 10
 
-MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Paramount Pictures"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Paramount Pictures"}) with a.name AS genre, k.keyword AS word, COUNT(*) as present
 RETURN word
 ORDER BY present DESC LIMIT 10
 ```
