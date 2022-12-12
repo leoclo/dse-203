@@ -24,9 +24,12 @@ def load(graph4j, dfs, load_settings):
     for c in load_settings['constraints']:
         graph4j.create_constraint(**c)
 
-    for k, df in dfs.items():
+    insert_order = ['company', 'genres', 'awards', 'topics', 'people', 'movies']
+    for k in insert_order:
+        df = dfs[k]
         graph4j.df2neo4j(df, load_settings['data'][k])
-    return graph4j
+        
+    return graph4j 
 
 
 def crawler_award(settings):
