@@ -61,18 +61,8 @@ Download the dataset and unzip the archive folder into folder src/files. The fil
 
 ## Running ETL
 
-With the pyenv activate:
+Run the final_app.ipynb notebook for complete graph creation
 
-```bash
-source venv/bin/activate
-```
-
-Run the following
-
-```bash
- python src/app.py settings.json etl
-
-```
 
 On your browser login to neo4j on the following URL:
 

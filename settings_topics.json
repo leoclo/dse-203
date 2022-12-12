@@ -1,0 +1,60 @@
+{
+  "crawler": {
+    "on": false
+  },
+  "extract": {
+    "directors": {
+      "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
+      "sep": ";"
+    },
+    "movies": {
+      "filepath_or_buffer": "src/files/archive/AllMoviesDetailsCleaned.csv",
+      "sep": ";"
+    },
+    "cast": {
+      "filepath_or_buffer": "src/files/archive/AllMoviesCastingRaw.csv",
+      "sep": ";"
+    }
+  },
+  "transform": {
+    "directors": {
+      "column_map": {
+        "name": "name",
+        "Academy Fellowship": "acad_fellow"
+      }
+    },
+    "movies": {
+      "column_map": {
+        "id": "movie_id",
+        "imdb_id": "imdb_id",
+        "original_language": "lang",
+        "title": "title",
+        "overview": "overview",
+        "genres": "genres",
+        "production_companies": "company",
+        "vote_average": "vote_average",
+        "vote_count": "vote_count",
+        "budget": "budget",
+        "revenue": "revenue",
+        "runtime": "runtime"
+      }
+    },
+    "cast": {
+      "column_map": {
+        "id": "movie_id",
+        "actor1_name": "actor1_name",
+        "actor1_gender": "actor1_gender",
+        "actor2_name": "actor2_name",
+        "actor2_gender": "actor2_gender",
+        "actor3_name": "actor3_name",
+        "actor3_gender": "actor3_gender",
+        "actor4_name": "actor4_name",
+        "actor4_gender": "actor4_gender",
+        "actor5_name": "actor5_name",
+        "actor5_gender": "actor5_gender",
+        "director_name": "director_name",
+        "director_gender": "director_gender"
+      }
+    }
+  }
+}

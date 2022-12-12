@@ -7,7 +7,6 @@ class App():
 
     def __init__(self, settings):
         self.settings = settings
-        self.graph4j = GraphNeo4j(**settings['neo4j'])
 
     def __getitem__(self, k):
         return getattr(self, k)
@@ -18,7 +17,7 @@ class App():
     def etl(self, dfs=None):
         if dfs is None:
             dfs = self.extract_transform()
-        return core.load(self.graph4j, dfs, self.settings['load'])
+        return core.load(GraphNeo4j(**self.settings['neo4j']), dfs, self.settings['load'])
 
 
 

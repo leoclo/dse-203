@@ -153,21 +153,24 @@ class DataFrameTransform():
             final_df_data['companies'].append([company])
 
 
-        awards = pd.concat([self.dfs['awards_won'], self.dfs['awards_nominated']])
-        awards = awards[['award_company', 'award_type', 'year']].drop_duplicates()
-        awards = awards.reset_index().rename(columns={'index': 'award_id'})
-
         dfs = {
-            'topics': self.dfs['topics'],
-            'awards': awards,
             'company': pd.DataFrame(companies).drop_duplicates(subset='name'),
             'people': pd.DataFrame(people).drop_duplicates(subset='name'),
             'genres': pd.DataFrame(genres).drop_duplicates(),
             'movies': pd.DataFrame(final_df_data),
         }
-        dfs = append_award(dfs, self.dfs['awards_won'], k='awards_won')
-        dfs = append_award(dfs, self.dfs['awards_nominated'], k='awards_nominated')
-        dfs = append_topics(dfs, self.dfs['topics_movies'])
+
+        if 'awards_won' in self.dfs:
+            awards = pd.concat([self.dfs['awards_won'], self.dfs['awards_nominated']])
+            awards = awards[['award_company', 'award_type', 'year']].drop_duplicates()
+            awards = awards.reset_index().rename(columns={'index': 'award_id'})
+            dfs['awards'] = awards
+            dfs = append_award(dfs, self.dfs['awards_won'], k='awards_won')
+            dfs = append_award(dfs, self.dfs['awards_nominated'], k='awards_nominated')
+
+        if 'topics' in self.dfs:
+            dfs = append_topics(dfs, self.dfs['topics_movies'])
+            dfs['topics'] = self.dfs['topics']
 
         self.dfs = dfs
 
