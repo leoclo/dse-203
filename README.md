@@ -2,7 +2,16 @@
 
 # Introduction
 
-Project to create graph database for movies kaggle dataset and custom data crawlers for the DSE 203 course
+This project is to create graph database for movies kaggle dataset and custom data crawlers to extract award data from wikipedia.
+
+(Paraphrased from the Presentation)
+This program creates a knowledge graph from a dataset containing 800-900 movie directors, the movies they directed, the awards they won, as well as the cast of the movies these directors worked on.
+
+The graph's object is to determine what we can use to describe the similarity of movies’ contents besides genre, such as if we can take keywords from a movie’s summary and categorize them using them instead. What (dis)similarities would they find?
+
+We also wanted to see if there are opportunities to create or rediscover working relationships between actors based on commonly-shared networks of people.
+
+## Acquiring the repository
 
 Clone the repository or download the .zip file and extract it on the desired directory
 
@@ -48,7 +57,7 @@ pip install -r requirements.txt
 
 https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg
 
-Download the dataset and unzip in folder src/files
+Download the dataset and unzip the archive folder into folder src/files. The files should be in src/files/archive.
 
 ## Running ETL
 
@@ -73,20 +82,71 @@ Got to the database and see Node labels created
 
 Note:
 
-There is a notebook in root folder called app.ipynb that can also be used for
+There is a notebook in root folder called final_app.ipynb that can also be used for
 using app modules
 
-## Questions
+# How it works
 
-- Which directors have the most of awards in a genre ?
-- Find actors who worked with the same director but not in the same movie ?
-- Find actors who won awards with the same director in the same movie genre ?
-- Which actors should work together in a movie ?
-  - We could start by finding actors that never worked together but have worked with multiple actors in common. So IF actor A and B have worked with actor C and director X and have won awards with director X in genre Y.
-  - A and B have never worked in a movie together.
+We use a JSON file to set the behavior of the
+
+
+
+With the graph created, this query is then passed in to create the final keyword node, which unravels the topic nodes into their component keywords and merge them together by their unique value. This allows the nodes to connect across the scope of all movies, not just within the batch of 30.
+
+
+'''
+
+'''
+
+Note: the keyword comes from the topic node, not the overview of the movies they link to, and as such might not actually be in the overview.
+
+# Queries For Project
+
+- What popular keywords does the romance genre turn up? Does it compare meaningfully from comedy? What about Warner Brothers company next to Paramount? Are the differing words informative enough that we can use keywords to differentiate the two?
+
+```
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Romance"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Genre {name: "Comedy"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Warner Bros."}) with a.name AS genre, k.keyword AS word, COUNT() as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+
+MATCH (k:Keyword)--(m:Movie)--(a:Company {name: "Paramount Pictures"}) with a.name AS genre, k.keyword AS word, COUNT() as present
+RETURN word
+ORDER BY present DESC LIMIT 10
+```
+
+- Which actors that have not worked in the current list of movies have won in the same award category and share keywords between the movies?
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:Person),
+(a)-[:WON]->(w1:Award),
+(c)-[:WON]->(w2:Award),
+(m)-[:HAS_KEYWORD]->(k:Keyword)<-[:HAS_KEYWORD]-(n)
+WHERE a.name < c.name AND w1.award_type = w2.award_type
+AND NOT (a)--(:Movie)--(c) AND k.keyword = 'friend'
+RETURN DISTINCT a.name, c.name,  k.keyword
+```
+
+- In the same vein, which actors that have not worked in the current list of movies are likely to have done so in an unlisted film, based on the network of people they’ve worked in common with?
+  - A and B have not worked together in the given movies.
+  - Find actors A and B have in common from other movies. So if actor A and B have worked with actor C and director X in a movie.
   - Actors must speak at least one common language (determined by original language of movies worked in)
   - Give the top 10 actors by # of finds for that specific actor.
-- Which actors work ONLY with directors who won 1 award or less.
+
+```
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:Person)
+WHERE a.name < c.name
+WITH a, c, COUNT(*) AS network
+WHERE NOT (a)--(:Movie)--(c)
+RETURN a.name, c.name, network ORDER BY network DESC LIMIT 10 
+```
 
 ## Nodes
 
@@ -125,15 +185,14 @@ using app modules
 - HAS_TOPIC (Movie->Topic)
 - HAS_KEYWORD(Movie->Keyword)
 
-# Interesting Queries
+# Other Interesting Queries
 
-### Reorganize topics into keywords. Reaches outside of the slices the topics were made
+### From the notebook, reorganize topics into keywords. Reaches outside of the slices the topics were made.
 
 ```
 MATCH (t:Topic)<-[]-(m:Movie) UNWIND(t.topics) as keyword
 MERGE (k:Keyword {keyword: keyword})
 MERGE (k)<-[:HAS_KEYWORD]-(m)
-DETACH DELETE t
 ```
 
 ### Most number of keywords used by movies
@@ -155,36 +214,51 @@ ORDER BY amt_movies DESC
 
 ```
 
-### Misc
+### Comedy films by Quentin Tarantino
 
 ```
 MATCH (a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person), (m:Movie)-[:HAS_GENRE]-(g:Genre)
 WHERE d.name='Quentin Tarantino' AND g.name = 'Comedy'
 RETURN DISTINCT a.name, m.title
+```
 
+### Movies produced by Vía Digital
+
+```
 MATCH (m:Movie)-[:PRODUCED]-(c:Company)
 WHERE c.name='Vía Digital'
 RETURN DISTINCT m.title
-
+```
+```
 MATCH (a:Person)-[:NOMINATED]-(aw:Award), (a:Person)-[:ACTED_IN]-(m:Movie)
 RETURN DISTINCT a.name, aw.year, aw.award_company, aw.award_type, m.title
+```
 
+### Awards won by Quentin Tarantino for action films
 
+```
 MATCH
 	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
 	(m:Movie)-[:HAS_GENRE]-(g:Genre),
 	(a:Person)-[:NOMINATED]-(aw:Award)
 WHERE d.name='Quentin Tarantino' AND g.name = 'Action'
 RETURN DISTINCT a.name, m.title, aw.award_company, aw.award_type
+```
 
+###  Drama films by Roman Polanski that were nominated
+
+```
 MATCH
 	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
 	(m:Movie)-[:HAS_GENRE]-(g:Genre),
 	(a:Person)-[:NOMINATED]-(aw:Award)
 WHERE  d.name='Roman Polanski'AND g.name = 'Drama'
 RETURN DISTINCT d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
+```
 
+### Drama films by Roman polanski that were nominated and has 'spacecraft' in its topic node
 
+```
 MATCH
 	(a:Person)-[:ACTED_IN]-(m:Movie)-[:DIRECTED]-(d:Person),
 	(m:Movie)-[:HAS_GENRE]-(g:Genre),
@@ -192,5 +266,4 @@ MATCH
 	(a:Person)-[:NOMINATED]-(aw:Award)
 WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND any(x IN t.topics WHERE x IN ['spacecraft'])
 RETURN DISTINCT t.topics, d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
-
 ```
