@@ -57,7 +57,21 @@ pip install -r requirements.txt
 
 https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg
 
-Download the dataset and unzip the archive folder into folder src/files. The files should be in src/files/archive.
+Download the dataset and unzip the archive folder into folder src/files. The files should be in src/files/archive and you should get the following tree.
+
+- [repository root]
+  - src
+    - files
+      - archive
+        - 220k_awards_by_directors.csv
+        - 500 favorite directors_with wikipedia summary.csv
+        - AllMoviesCastingRaw.csv
+        - AllMoviesDetailsCleaned.csv
+        - language to country.csv
+        - MostCommonLanguageByDirector.csv
+        - spielberg_awards.csv
+        - 900_acclaimed_directors_awards
+          - 900_acclaimed_directors_awards.csv
 
 ## Running ETL
 
