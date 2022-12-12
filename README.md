@@ -75,7 +75,6 @@ Download the dataset archive from the download button at the top and unzip the a
 
 Run the final_app.ipynb notebook for complete graph creation
 
-
 On your browser login to neo4j on the following URL:
 
 http://localhost:7474/browser/
@@ -90,6 +89,7 @@ using app modules
 # How it works
 
 final_app.ipynb:
+
 ```
 settings = utils.get_settings_notebook('../settings_topics.json')
 
@@ -100,6 +100,7 @@ We use a JSON file to set the behavior of the overall program. This determines w
 `settings_topics.json` simply loads in the data for directors, cast, and movies, and does not perform any actions with neo4j.
 
 final_app.ipynb:
+
 ```
 app = App(settings)
 dfs = app.extract_transform()
@@ -108,6 +109,7 @@ dfs = app.extract_transform()
 We start by runing `extract_transform()`, which performs the action of both extracting the data from the csv files and transforming them into a dictionary of dataframes called `dfs`.
 
 core.py:
+
 ```
 def extract_transform(settings):
     df_transform = DataFrameTransform()
@@ -134,6 +136,7 @@ While each dataframe is extraccted, it undergoes a transformation in `df_transfo
 Using `settings_topics.json`, we extract and transform the movie, cast, and director dataframes.
 
 final_app.ipynb:
+
 ```
 movie_topics = gen_topics()
 # (df_movie_topics, df_topic_words) = movie_topics.batch_process(data_df['movies'][data_df['movies']['lang'] == 'en'])
@@ -147,11 +150,13 @@ df_movie_topics.reset_index(drop=True, inplace=True)
 df_topic_words.to_csv('./files/archive/topic_words.csv', index=True)
 df_movie_topics.to_csv('./files/archive/movie_topic_ids.csv', index=True)
 ```
+
 Using this limited dictionary of dataframes, we take the movies we prunned down to and generate topics for them and write them into a file.
 
 With the graph created, a query is then passed in to create the final keyword node, which unravels the topic nodes into their component keywords and merge them together by their unique value. This allows the nodes to connect across the scope of all movies, not just within the batch of 30.
 
 final_app.ipynb:
+
 ```
 settings = utils.get_settings_notebook('../settings.json')
 app = App(settings)
@@ -163,6 +168,7 @@ Using `settings.json` extracts from all the files, including data for awards and
 `app.etl` calls the same `extract_transform()` function from before, but with the new settings file, all the data we are working with is extracted and transformed. Then, using the connection and authentication data provided in the settings file, connects to neo4j and exports the information in the dataframes to the database based on the template provided by the settings file.
 
 final_app.ipynb:
+
 ```
 graph4j = GraphNeo4j(**{**settings['neo4j'], 'clear_data': False})
 qry = '''
@@ -222,7 +228,7 @@ MATCH (a:Person)-[:ACTED_IN]->(m:Movie)--(b:Person)--(n:Movie)<-[:ACTED_IN]-(c:P
 WHERE a.name < c.name
 WITH a, c, COUNT(*) AS network
 WHERE NOT (a)--(:Movie)--(c)
-RETURN a.name, c.name, network ORDER BY network DESC LIMIT 10 
+RETURN a.name, c.name, network ORDER BY network DESC LIMIT 10
 ```
 
 ## Nodes
@@ -306,6 +312,7 @@ MATCH (m:Movie)-[:PRODUCED]-(c:Company)
 WHERE c.name='Vía Digital'
 RETURN DISTINCT m.title
 ```
+
 ```
 MATCH (a:Person)-[:NOMINATED]-(aw:Award), (a:Person)-[:ACTED_IN]-(m:Movie)
 RETURN DISTINCT a.name, aw.year, aw.award_company, aw.award_type, m.title
@@ -322,7 +329,7 @@ WHERE d.name='Quentin Tarantino' AND g.name = 'Action'
 RETURN DISTINCT a.name, m.title, aw.award_company, aw.award_type
 ```
 
-###  Drama films by Roman Polanski that were nominated
+### Drama films by Roman Polanski that were nominated
 
 ```
 MATCH
@@ -341,6 +348,6 @@ MATCH
 	(m:Movie)-[:HAS_GENRE]-(g:Genre),
 	(m:Movie)-[:HAS_TOPIC]-(t:Topic),
 	(a:Person)-[:NOMINATED]-(aw:Award)
-WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND any(x IN t.topics WHERE x IN ['spacecraft'])
+WHERE  d.name='Roman Polanski'AND g.name = 'Drama' AND any(x IN t.topics WHERE x IN ['pianist'])
 RETURN DISTINCT t.topics, d.name, a.name, m.title, aw.award_company, aw.award_type, aw.year, g.name
 ```

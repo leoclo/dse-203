@@ -31,7 +31,7 @@
       "sep": ","
     },
     "directors": {
-      "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards.csv",
+      "filepath_or_buffer": "src/files/archive/900_acclaimed_directors_awards/900_acclaimed_directors_awards.csv",
       "sep": ";"
     },
     "movies": {
