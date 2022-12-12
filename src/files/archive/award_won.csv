@@ -1,0 +1,599 @@
+,award_company,award_type,movie,person,year
+0,oscars,best_director,7th Heaven,Frank Borzage,1927
+1,oscars,best_director,The Divine Lady,Frank Lloyd,1928
+2,oscars,best_director,All Quiet on the Western Front,Lewis Milestone,1929
+3,oscars,best_director,Skippy,Norman Taurog,1930
+4,oscars,best_director,Bad Girl,Frank Borzage,1931
+5,oscars,best_director,Cavalcade,Frank Lloyd,1932
+6,oscars,best_director,It Happened One Night,Frank Capra,1934
+7,oscars,best_director,The Informer,John Ford,1935
+8,oscars,best_director,Mr. Deeds Goes to Town,Frank Capra,1936
+9,oscars,best_director,The Awful Truth,Leo McCarey,1937
+10,oscars,best_director,You Can't Take It with You,Frank Capra,1938
+11,oscars,best_director,Gone with the Wind,Victor Fleming,1939
+12,oscars,best_director,The Grapes of Wrath,John Ford,1940
+13,oscars,best_director,How Green Was My Valley,John Ford,1941
+14,oscars,best_director,Mrs. Miniver,William Wyler,1942
+15,oscars,best_director,Casablanca,Michael Curtiz,1943
+16,oscars,best_director,Going My Way,Leo McCarey,1944
+17,oscars,best_director,The Lost Weekend,Billy Wilder,1945
+18,oscars,best_director,The Best Years of Our Lives,William Wyler,1946
+19,oscars,best_director,Gentleman's Agreement,Elia Kazan,1947
+20,oscars,best_director,The Treasure of the Sierra Madre,John Huston,1948
+21,oscars,best_director,A Letter to Three Wives,Joseph L. Mankiewicz,1949
+22,oscars,best_director,All About Eve,Joseph L. Mankiewicz,1950
+23,oscars,best_director,A Place in the Sun,George Stevens,1951
+24,oscars,best_director,The Quiet Man,John Ford,1952
+25,oscars,best_director,From Here to Eternity,Fred Zinnemann,1953
+26,oscars,best_director,On the Waterfront,Elia Kazan,1954
+27,oscars,best_director,Marty,Delbert Mann,1955
+28,oscars,best_director,Giant,George Stevens,1956
+29,oscars,best_director,The Bridge on the River Kwai,David Lean,1957
+30,oscars,best_director,Gigi,Vincente Minnelli,1958
+31,oscars,best_director,Ben-Hur,William Wyler,1959
+32,oscars,best_director,The Apartment,Billy Wilder,1960
+33,oscars,best_director,West Side Story,Jerome Robbins,1961
+34,oscars,best_director,Lawrence of Arabia,David Lean,1962
+35,oscars,best_director,Tom Jones,Tony Richardson,1963
+36,oscars,best_director,My Fair Lady,George Cukor,1964
+37,oscars,best_director,The Sound of Music,Robert Wise,1965
+38,oscars,best_director,A Man for All Seasons,Fred Zinnemann,1966
+39,oscars,best_director,The Graduate,Mike Nichols,1967
+40,oscars,best_director,Oliver!,Carol Reed,1968
+41,oscars,best_director,Midnight Cowboy,John Schlesinger,1969
+42,oscars,best_director,Patton,Franklin J. Schaffner,1970
+43,oscars,best_director,The French Connection,William Friedkin,1971
+44,oscars,best_director,Cabaret,Bob Fosse,1972
+45,oscars,best_director,The Sting,George Roy Hill,1973
+46,oscars,best_director,The Godfather Part II,Francis Ford Coppola,1974
+47,oscars,best_director,One Flew Over the Cuckoo's Nest,Miloš Forman,1975
+48,oscars,best_director,Rocky,John G. Avildsen,1976
+49,oscars,best_director,Annie Hall,Woody Allen,1977
+50,oscars,best_director,The Deer Hunter,Michael Cimino,1978
+51,oscars,best_director,Kramer vs. Kramer,Robert Benton,1979
+52,oscars,best_director,Ordinary People,Robert Redford,1980
+53,oscars,best_director,Reds,Warren Beatty,1981
+54,oscars,best_director,Gandhi,Richard Attenborough,1982
+55,oscars,best_director,Terms of Endearment,James L. Brooks,1983
+56,oscars,best_director,Amadeus,Miloš Forman,1984
+57,oscars,best_director,Out of Africa,Sydney Pollack,1985
+58,oscars,best_director,Platoon,Oliver Stone,1986
+59,oscars,best_director,The Last Emperor,Bernardo Bertolucci,1987
+60,oscars,best_director,Rain Man,Barry Levinson,1988
+61,oscars,best_director,Born on the Fourth of July,Oliver Stone,1989
+62,oscars,best_director,Dances with Wolves,Kevin Costner,1990
+63,oscars,best_director,The Silence of the Lambs,Jonathan Demme,1991
+64,oscars,best_director,Unforgiven,Clint Eastwood,1992
+65,oscars,best_director,Schindler's List,Steven Spielberg,1993
+66,oscars,best_director,Forrest Gump,Robert Zemeckis,1994
+67,oscars,best_director,Braveheart,Mel Gibson,1995
+68,oscars,best_director,The English Patient,Anthony Minghella,1996
+69,oscars,best_director,Titanic,James Cameron,1997
+70,oscars,best_director,Saving Private Ryan,Steven Spielberg,1998
+71,oscars,best_director,American Beauty,Sam Mendes,1999
+72,oscars,best_director,Traffic,Steven Soderbergh,2000
+73,oscars,best_director,A Beautiful Mind,Ron Howard,2001
+74,oscars,best_director,The Pianist,Roman Polanski,2002
+75,oscars,best_director,The Lord of the Rings: The Return of the King,Peter Jackson,2003
+76,oscars,best_director,Million Dollar Baby,Clint Eastwood,2004
+77,oscars,best_director,Brokeback Mountain,Ang Lee,2005
+78,oscars,best_director,The Departed,Martin Scorsese,2006
+79,oscars,best_director,No Country for Old Men,Joel Coen and Ethan Coen,2007
+80,oscars,best_director,Slumdog Millionaire,Danny Boyle,2008
+81,oscars,best_director,The Hurt Locker,Kathryn Bigelow,2009
+82,oscars,best_director,The King's Speech,Tom Hooper,2010
+83,oscars,best_director,The Artist,Michel Hazanavicius,2011
+84,oscars,best_director,Life of Pi,Ang Lee,2012
+85,oscars,best_director,Gravity,Alfonso Cuarón,2013
+86,oscars,best_director,Birdman,Alejandro González Iñárritu,2014
+87,oscars,best_director,The Revenant,Alejandro González Iñárritu,2015
+88,oscars,best_director,La La Land,Damien Chazelle,2016
+89,oscars,best_director,The Shape of Water,Guillermo del Toro,2017
+90,oscars,best_director,Roma,Alfonso Cuarón,2018
+91,oscars,best_director,Parasite,Bong Joon-ho,2019
+92,oscars,best_director,Nomadland,Chloé Zhao,2020/21
+93,oscars,best_director,The Power of the Dog,Jane Campion,2021
+94,oscars,best_actor,The Last Command,Emil Jannings,1927
+95,oscars,best_actor,In Old Arizona,Warner Baxter,1928
+96,oscars,best_actor,Disraeli,George Arliss,1929
+97,oscars,best_actor,A Free Soul,Lionel Barrymore,1930
+98,oscars,best_actor,The Champ,Wallace Beery,1931
+99,oscars,best_actor,The Private Life of Henry VIII,Charles Laughton,1932
+100,oscars,best_actor,It Happened One Night,Clark Gable,1934
+101,oscars,best_actor,The Informer,Victor McLaglen,1935
+102,oscars,best_actor,The Story of Louis Pasteur,Paul Muni,1936
+103,oscars,best_actor,Captains Courageous,Spencer Tracy,1937
+104,oscars,best_actor,Boys Town,Spencer Tracy,1938
+105,oscars,best_actor,"Goodbye, Mr. Chips",Robert Donat,1939
+106,oscars,best_actor,The Philadelphia Story,James Stewart,1940
+107,oscars,best_actor,Sergeant York,Gary Cooper,1941
+108,oscars,best_actor,Yankee Doodle Dandy,James Cagney,1942
+109,oscars,best_actor,Watch on the Rhine,Paul Lukas,1943
+110,oscars,best_actor,Going My Way,Bing Crosby,1944
+111,oscars,best_actor,The Lost Weekend,Ray Milland,1945
+112,oscars,best_actor,The Best Years of Our Lives,Fredric March,1946
+113,oscars,best_actor,A Double Life,Ronald Colman,1947
+114,oscars,best_actor,Hamlet,Laurence Olivier,1948
+115,oscars,best_actor,All the King's Men,Broderick Crawford,1949
+116,oscars,best_actor,Cyrano de Bergerac,José Ferrer,1950
+117,oscars,best_actor,The African Queen,Humphrey Bogart,1951
+118,oscars,best_actor,High Noon,Gary Cooper,1952
+119,oscars,best_actor,Stalag 17,William Holden,1953
+120,oscars,best_actor,On the Waterfront,Marlon Brando,1954
+121,oscars,best_actor,Marty,Ernest Borgnine,1955
+122,oscars,best_actor,The King and I,Yul Brynner,1956
+123,oscars,best_actor,The Bridge on the River Kwai,Alec Guinness,1957
+124,oscars,best_actor,Separate Tables,David Niven,1958
+125,oscars,best_actor,Ben-Hur,Charlton Heston,1959
+126,oscars,best_actor,Elmer Gantry,Burt Lancaster,1960
+127,oscars,best_actor,Judgment at Nuremberg,Maximilian Schell,1961
+128,oscars,best_actor,To Kill a Mockingbird,Gregory Peck,1962
+129,oscars,best_actor,Lilies of the Field,Sidney Poitier,1963
+130,oscars,best_actor,My Fair Lady,Rex Harrison,1964
+131,oscars,best_actor,Cat Ballou,Lee Marvin,1965
+132,oscars,best_actor,A Man for All Seasons,Paul Scofield,1966
+133,oscars,best_actor,In the Heat of the Night,Rod Steiger,1967
+134,oscars,best_actor,Charly,Cliff Robertson,1968
+135,oscars,best_actor,True Grit,John Wayne,1969
+136,oscars,best_actor,Patton,George C. Scott,1970
+137,oscars,best_actor,The French Connection,Gene Hackman,1971
+138,oscars,best_actor,The Godfather,Marlon Brando,1972
+139,oscars,best_actor,Save the Tiger,Jack Lemmon,1973
+140,oscars,best_actor,Harry and Tonto,Art Carney,1974
+141,oscars,best_actor,One Flew Over the Cuckoo's Nest,Jack Nicholson,1975
+142,oscars,best_actor,Network,Peter Finch,1976
+143,oscars,best_actor,The Goodbye Girl,Richard Dreyfuss,1977
+144,oscars,best_actor,Coming Home,Jon Voight,1978
+145,oscars,best_actor,Kramer vs. Kramer,Dustin Hoffman,1979
+146,oscars,best_actor,Raging Bull,Robert De Niro,1980
+147,oscars,best_actor,On Golden Pond,Henry Fonda,1981
+148,oscars,best_actor,Gandhi,Ben Kingsley,1982
+149,oscars,best_actor,Tender Mercies,Robert Duvall,1983
+150,oscars,best_actor,Amadeus,F. Murray Abraham,1984
+151,oscars,best_actor,Kiss of the Spider Woman,William Hurt,1985
+152,oscars,best_actor,The Color of Money,Paul Newman,1986
+153,oscars,best_actor,Wall Street,Michael Douglas,1987
+154,oscars,best_actor,Rain Man,Dustin Hoffman,1988
+155,oscars,best_actor,My Left Foot,Daniel Day-Lewis,1989
+156,oscars,best_actor,Reversal of Fortune,Jeremy Irons,1990
+157,oscars,best_actor,The Silence of the Lambs,Anthony Hopkins,1991
+158,oscars,best_actor,Scent of a Woman,Al Pacino,1992
+159,oscars,best_actor,Philadelphia,Tom Hanks,1993
+160,oscars,best_actor,Forrest Gump,Tom Hanks,1994
+161,oscars,best_actor,Leaving Las Vegas,Nicolas Cage,1995
+162,oscars,best_actor,Shine,Geoffrey Rush,1996
+163,oscars,best_actor,As Good as It Gets,Jack Nicholson,1997
+164,oscars,best_actor,Life Is Beautiful,Roberto Benigni,1998
+165,oscars,best_actor,American Beauty,Kevin Spacey,1999
+166,oscars,best_actor,Gladiator,Russell Crowe,2000
+167,oscars,best_actor,Training Day,Denzel Washington,2001
+168,oscars,best_actor,The Pianist,Adrien Brody,2002
+169,oscars,best_actor,Mystic River,Sean Penn,2003
+170,oscars,best_actor,Ray,Jamie Foxx,2004
+171,oscars,best_actor,Capote,Philip Seymour Hoffman,2005
+172,oscars,best_actor,The Last King of Scotland,Forest Whitaker,2006
+173,oscars,best_actor,There Will Be Blood,Daniel Day-Lewis,2007
+174,oscars,best_actor,Milk,Sean Penn,2008
+175,oscars,best_actor,Crazy Heart,Jeff Bridges,2009
+176,oscars,best_actor,The King's Speech,Colin Firth,2010
+177,oscars,best_actor,The Artist,Jean Dujardin,2011
+178,oscars,best_actor,Lincoln,Daniel Day-Lewis,2012
+179,oscars,best_actor,Dallas Buyers Club,Matthew McConaughey,2013
+180,oscars,best_actor,The Theory of Everything,Eddie Redmayne,2014
+181,oscars,best_actor,The Revenant,Leonardo DiCaprio,2015
+182,oscars,best_actor,Manchester by the Sea,Casey Affleck,2016
+183,oscars,best_actor,Darkest Hour,Gary Oldman,2017
+184,oscars,best_actor,Bohemian Rhapsody,Rami Malek,2018
+185,oscars,best_actor,Joker,Joaquin Phoenix,2019
+186,oscars,best_actor,The Father,Anthony Hopkins,2020/21
+187,oscars,best_actor,King Richard,Will Smith,2021
+188,oscars,best_actress,7th Heaven,Janet Gaynor,1927
+189,oscars,best_actress,Coquette,Mary Pickford,1928
+190,oscars,best_actress,The Divorcee,Norma Shearer,1929
+191,oscars,best_actress,Min and Bill,Marie Dressler,1930
+192,oscars,best_actress,The Sin of Madelon Claudet,Helen Hayes,1931
+193,oscars,best_actress,Morning Glory,Katharine Hepburn,1932
+194,oscars,best_actress,It Happened One Night,Claudette Colbert,1934
+195,oscars,best_actress,Dangerous,Bette Davis,1935
+196,oscars,best_actress,The Great Ziegfeld,Luise Rainer,1936
+197,oscars,best_actress,The Good Earth,Luise Rainer,1937
+198,oscars,best_actress,Jezebel,Bette Davis,1938
+199,oscars,best_actress,Gone with the Wind,Vivien Leigh,1939
+200,oscars,best_actress,Kitty Foyle,Ginger Rogers,1940
+201,oscars,best_actress,Suspicion,Joan Fontaine,1941
+202,oscars,best_actress,Mrs. Miniver,Greer Garson,1942
+203,oscars,best_actress,The Song of Bernadette,Jennifer Jones,1943
+204,oscars,best_actress,Gaslight,Ingrid Bergman,1944
+205,oscars,best_actress,Mildred Pierce,Joan Crawford,1945
+206,oscars,best_actress,To Each His Own,Olivia de Havilland,1946
+207,oscars,best_actress,The Farmer's Daughter,Loretta Young,1947
+208,oscars,best_actress,Johnny Belinda,Jane Wyman,1948
+209,oscars,best_actress,The Heiress,Olivia de Havilland,1949
+210,oscars,best_actress,Born Yesterday,Judy Holliday,1950
+211,oscars,best_actress,A Streetcar Named Desire,Vivien Leigh,1951
+212,oscars,best_actress,"Come Back, Little Sheba",Shirley Booth,1952
+213,oscars,best_actress,Roman Holiday,Audrey Hepburn,1953
+214,oscars,best_actress,The Country Girl,Grace Kelly,1954
+215,oscars,best_actress,The Rose Tattoo,Anna Magnani,1955
+216,oscars,best_actress,Anastasia,Ingrid Bergman,1956
+217,oscars,best_actress,The Three Faces of Eve,Joanne Woodward,1957
+218,oscars,best_actress,I Want to Live!,Susan Hayward,1958
+219,oscars,best_actress,Room at the Top,Simone Signoret,1959
+220,oscars,best_actress,BUtterfield 8,Elizabeth Taylor,1960
+221,oscars,best_actress,Two Women,Sophia Loren,1961
+222,oscars,best_actress,The Miracle Worker,Anne Bancroft,1962
+223,oscars,best_actress,Hud,Patricia Neal,1963
+224,oscars,best_actress,Mary Poppins,Julie Andrews,1964
+225,oscars,best_actress,Darling,Julie Christie,1965
+226,oscars,best_actress,Who's Afraid of Virginia Woolf?,Elizabeth Taylor,1966
+227,oscars,best_actress,Guess Who's Coming to Dinner,Katharine Hepburn,1967
+228,oscars,best_actress,The Lion in Winter,Katharine Hepburn,1968
+229,oscars,best_actress,The Prime of Miss Jean Brodie,Maggie Smith,1969
+230,oscars,best_actress,Women in Love,Glenda Jackson,1970
+231,oscars,best_actress,Klute,Jane Fonda,1971
+232,oscars,best_actress,Cabaret,Liza Minnelli,1972
+233,oscars,best_actress,A Touch of Class,Glenda Jackson,1973
+234,oscars,best_actress,Alice Doesn't Live Here Anymore,Ellen Burstyn,1974
+235,oscars,best_actress,One Flew Over the Cuckoo's Nest,Louise Fletcher,1975
+236,oscars,best_actress,Network,Faye Dunaway,1976
+237,oscars,best_actress,Annie Hall,Diane Keaton,1977
+238,oscars,best_actress,Coming Home,Jane Fonda,1978
+239,oscars,best_actress,Norma Rae,Sally Field,1979
+240,oscars,best_actress,Coal Miner's Daughter,Sissy Spacek,1980
+241,oscars,best_actress,On Golden Pond,Katharine Hepburn,1981
+242,oscars,best_actress,Sophie's Choice,Meryl Streep,1982
+243,oscars,best_actress,Terms of Endearment,Shirley MacLaine,1983
+244,oscars,best_actress,Places in the Heart,Sally Field,1984
+245,oscars,best_actress,The Trip to Bountiful,Geraldine Page,1985
+246,oscars,best_actress,Children of a Lesser God,Marlee Matlin,1986
+247,oscars,best_actress,Moonstruck,Cher,1987
+248,oscars,best_actress,The Accused,Jodie Foster,1988
+249,oscars,best_actress,Driving Miss Daisy,Jessica Tandy,1989
+250,oscars,best_actress,Misery,Kathy Bates,1990
+251,oscars,best_actress,The Silence of the Lambs,Jodie Foster,1991
+252,oscars,best_actress,Howards End,Emma Thompson,1992
+253,oscars,best_actress,The Piano,Holly Hunter,1993
+254,oscars,best_actress,Blue Sky,Jessica Lange,1994
+255,oscars,best_actress,Dead Man Walking,Susan Sarandon,1995
+256,oscars,best_actress,Fargo,Frances McDormand,1996
+257,oscars,best_actress,As Good as It Gets,Helen Hunt,1997
+258,oscars,best_actress,Shakespeare in Love,Gwyneth Paltrow,1998
+259,oscars,best_actress,Boys Don't Cry,Hilary Swank,1999
+260,oscars,best_actress,Erin Brockovich,Julia Roberts,2000
+261,oscars,best_actress,Monster's Ball,Halle Berry,2001
+262,oscars,best_actress,The Hours,Nicole Kidman,2002
+263,oscars,best_actress,Monster,Charlize Theron,2003
+264,oscars,best_actress,Million Dollar Baby,Hilary Swank,2004
+265,oscars,best_actress,Walk the Line,Reese Witherspoon,2005
+266,oscars,best_actress,The Queen,Helen Mirren,2006
+267,oscars,best_actress,La Vie en Rose,Marion Cotillard,2007
+268,oscars,best_actress,The Reader,Kate Winslet,2008
+269,oscars,best_actress,The Blind Side,Sandra Bullock,2009
+270,oscars,best_actress,Black Swan,Natalie Portman,2010
+271,oscars,best_actress,The Iron Lady,Meryl Streep,2011
+272,oscars,best_actress,Silver Linings Playbook,Jennifer Lawrence,2012
+273,oscars,best_actress,Blue Jasmine,Cate Blanchett,2013
+274,oscars,best_actress,Still Alice,Julianne Moore,2014
+275,oscars,best_actress,Room,Brie Larson,2015
+276,oscars,best_actress,La La Land,Emma Stone,2016
+277,oscars,best_actress,"Three Billboards Outside Ebbing, Missouri",Frances McDormand,2017
+278,oscars,best_actress,The Favourite,Olivia Colman,2018
+279,oscars,best_actress,Judy,Renée Zellweger,2019
+280,oscars,best_actress,Nomadland,Frances McDormand,2020/21
+281,oscars,best_actress,,,2021
+282,golden_globe,best_director,The Song of Bernadette,Henry King,1943
+283,golden_globe,best_director,Going My Way,Leo McCarey,1944
+284,golden_globe,best_director,The Lost Weekend,Billy Wilder,1945
+285,golden_globe,best_director,It's a Wonderful Life,Frank Capra,1946
+286,golden_globe,best_director,Gentleman's Agreement,Elia Kazan,1947
+287,golden_globe,best_director,The Treasure of the Sierra Madre,John Huston,1948
+288,golden_globe,best_director,All the King's Men,Robert Rossen,1949
+289,golden_globe,best_director,Sunset Boulevard,Billy Wilder,1950
+290,golden_globe,best_director,Death of a Salesman,László Benedek,1951
+291,golden_globe,best_director,The Greatest Show on Earth,Cecil B. DeMille,1952
+292,golden_globe,best_director,From Here to Eternity,Fred Zinnemann,1953
+293,golden_globe,best_director,On the Waterfront,Elia Kazan,1954
+294,golden_globe,best_director,Picnic,Joshua Logan,1955
+295,golden_globe,best_director,Baby Doll,Elia Kazan,1956
+296,golden_globe,best_director,The Bridge on the River Kwai,David Lean,1957
+297,golden_globe,best_director,Gigi,Vincente Minnelli,1958
+298,golden_globe,best_director,Ben-Hur,William Wyler,1959
+299,golden_globe,best_director,Sons and Lovers,Jack Cardiff,1960
+300,golden_globe,best_director,Judgment at Nuremberg,Stanley Kramer,1961
+301,golden_globe,best_director,Lawrence of Arabia,David Lean,1962
+302,golden_globe,best_director,America America,Elia Kazan,1963
+303,golden_globe,best_director,My Fair Lady,George Cukor,1964
+304,golden_globe,best_director,Doctor Zhivago,David Lean,1965
+305,golden_globe,best_director,A Man for All Seasons,Fred Zinnemann,1966
+306,golden_globe,best_director,The Graduate,Mike Nichols,1967
+307,golden_globe,best_director,"Rachel, Rachel",Paul Newman,1968
+308,golden_globe,best_director,Anne of the Thousand Days,Charles Jarrott,1969
+309,golden_globe,best_director,Love Story,Arthur Hiller,1970
+310,golden_globe,best_director,The French Connection,William Friedkin,1971
+311,golden_globe,best_director,The Godfather,Francis Ford Coppola,1972
+312,golden_globe,best_director,The Exorcist,William Friedkin,1973
+313,golden_globe,best_director,Chinatown,Roman Polanski,1974
+314,golden_globe,best_director,One Flew Over the Cuckoo's Nest,Miloš Forman,1975
+315,golden_globe,best_director,Network,Sidney Lumet,1976
+316,golden_globe,best_director,The Turning Point,Herbert Ross,1977
+317,golden_globe,best_director,The Deer Hunter,Michael Cimino,1978
+318,golden_globe,best_director,Apocalypse Now,Francis Ford Coppola,1979
+319,golden_globe,best_director,Ordinary People,Robert Redford,1980
+320,golden_globe,best_director,Reds,Warren Beatty,1981
+321,golden_globe,best_director,Gandhi,Richard Attenborough,1982
+322,golden_globe,best_director,Yentl,Barbra Streisand,1983
+323,golden_globe,best_director,Amadeus,Miloš Forman,1984
+324,golden_globe,best_director,Prizzi's Honor,John Huston,1985
+325,golden_globe,best_director,Platoon,Oliver Stone,1986
+326,golden_globe,best_director,The Last Emperor,Bernardo Bertolucci,1987
+327,golden_globe,best_director,Bird,Clint Eastwood,1988
+328,golden_globe,best_director,Born on the Fourth of July,Oliver Stone,1989
+329,golden_globe,best_director,Dances with Wolves,Kevin Costner,1990
+330,golden_globe,best_director,JFK,Oliver Stone,1991
+331,golden_globe,best_director,Unforgiven,Clint Eastwood,1992
+332,golden_globe,best_director,Schindler's List,Steven Spielberg,1993
+333,golden_globe,best_director,Forrest Gump,Robert Zemeckis,1994
+334,golden_globe,best_director,Braveheart,Mel Gibson,1995
+335,golden_globe,best_director,The People vs. Larry Flynt,Miloš Forman,1996
+336,golden_globe,best_director,Titanic,James Cameron,1997
+337,golden_globe,best_director,Saving Private Ryan,Steven Spielberg,1998
+338,golden_globe,best_director,American Beauty,Sam Mendes,1999
+339,golden_globe,best_director,"Crouching Tiger, Hidden Dragon",Ang Lee,2000
+340,golden_globe,best_director,Gosford Park,Robert Altman,2001
+341,golden_globe,best_director,Gangs of New York,Martin Scorsese,2002
+342,golden_globe,best_director,The Lord of the Rings: The Return of the King,Peter Jackson,2003
+343,golden_globe,best_director,Million Dollar Baby,Clint Eastwood,2004
+344,golden_globe,best_director,Brokeback Mountain,Ang Lee,2005
+345,golden_globe,best_director,The Departed,Martin Scorsese,2006
+346,golden_globe,best_director,The Diving Bell and the Butterfly,Julian Schnabel,2007
+347,golden_globe,best_director,Slumdog Millionaire,Danny Boyle,2008
+348,golden_globe,best_director,Avatar,James Cameron,2009
+349,golden_globe,best_director,The Social Network,David Fincher,2010
+350,golden_globe,best_director,Hugo,Martin Scorsese,2011
+351,golden_globe,best_director,Argo,Ben Affleck,2012
+352,golden_globe,best_director,Gravity,Alfonso Cuarón,2013
+353,golden_globe,best_director,Boyhood,Richard Linklater,2014
+354,golden_globe,best_director,The Revenant,Alejandro González Iñárritu,2015
+355,golden_globe,best_director,La La Land,Damien Chazelle,2016
+356,golden_globe,best_director,The Shape of Water,Guillermo del Toro,2017
+357,golden_globe,best_director,Roma,Alfonso Cuarón,2018
+358,golden_globe,best_director,1917,Sam Mendes,2019
+359,golden_globe,best_director,Nomadland,Chloé Zhao,2020
+360,golden_globe,best_director,The Power of the Dog,Jane Campion,2021
+361,golden_globe,best_actor,Watch on the Rhine,Paul Lukas,1943
+362,golden_globe,best_actor,Wilson,Alexander Knox,1944
+363,golden_globe,best_actor,The Lost Weekend,Ray Milland,1945
+364,golden_globe,best_actor,The Yearling,Gregory Peck,1946
+365,golden_globe,best_actor,A Double Life,Ronald Colman,1947
+366,golden_globe,best_actor,Hamlet,Laurence Olivier,1948
+367,golden_globe,best_actor,All the King's Men,Broderick Crawford,1949
+368,golden_globe,best_actor,Cyrano de Bergerac,José Ferrer,1950
+369,golden_globe,best_actor,Death of a Salesman,Fredric March,1951
+370,golden_globe,best_actor,High Noon,Gary Cooper,1952
+371,golden_globe,best_actor,The Actress,Spencer Tracy,1953
+372,golden_globe,best_actor,On the Waterfront,Marlon Brando,1954
+373,golden_globe,best_actor,Marty,Ernest Borgnine,1955
+374,golden_globe,best_actor,Lust for Life,Kirk Douglas,1956
+375,golden_globe,best_actor,The Bridge on the River Kwai,Alec Guinness,1957
+376,golden_globe,best_actor,Separate Tables,David Niven,1958
+377,golden_globe,best_actor,Career,Anthony Franciosa,1959
+378,golden_globe,best_actor,Elmer Gantry,Burt Lancaster,1960
+379,golden_globe,best_actor,Judgment at Nuremberg,Maximilian Schell,1961
+380,golden_globe,best_actor,To Kill a Mockingbird,Gregory Peck,1962
+381,golden_globe,best_actor,Lilies of the Field,Sidney Poitier,1963
+382,golden_globe,best_actor,Becket,Peter O'Toole,1964
+383,golden_globe,best_actor,Doctor Zhivago,Omar Sharif,1965
+384,golden_globe,best_actor,A Man for All Seasons,Paul Scofield,1966
+385,golden_globe,best_actor,In the Heat of the Night,Rod Steiger,1967
+386,golden_globe,best_actor,The Lion in Winter,Peter O'Toole,1968
+387,golden_globe,best_actor,True Grit,John Wayne,1969
+388,golden_globe,best_actor,Patton,George C. Scott,1970
+389,golden_globe,best_actor,The French Connection,Gene Hackman,1971
+390,golden_globe,best_actor,The Godfather,Marlon Brando,1972
+391,golden_globe,best_actor,Serpico,Al Pacino,1973
+392,golden_globe,best_actor,Chinatown,Jack Nicholson,1974
+393,golden_globe,best_actor,One Flew Over the Cuckoo's Nest,Jack Nicholson,1975
+394,golden_globe,best_actor,Network,Peter Finch,1976
+395,golden_globe,best_actor,Equus,Richard Burton,1977
+396,golden_globe,best_actor,Coming Home,Jon Voight,1978
+397,golden_globe,best_actor,Kramer vs. Kramer,Dustin Hoffman,1979
+398,golden_globe,best_actor,Raging Bull,Robert De Niro,1980
+399,golden_globe,best_actor,On Golden Pond,Henry Fonda,1981
+400,golden_globe,best_actor,Gandhi,Ben Kingsley,1982
+401,golden_globe,best_actor,The Dresser,Tom Courtenay,1983
+402,golden_globe,best_actor,Amadeus,F. Murray Abraham,1984
+403,golden_globe,best_actor,Runaway Train,Jon Voight,1985
+404,golden_globe,best_actor,Mona Lisa,Bob Hoskins,1986
+405,golden_globe,best_actor,Wall Street,Michael Douglas,1987
+406,golden_globe,best_actor,Rain Man,Dustin Hoffman,1988
+407,golden_globe,best_actor,Born on the Fourth of July,Tom Cruise,1989
+408,golden_globe,best_actor,Reversal of Fortune,Jeremy Irons,1990
+409,golden_globe,best_actor,The Prince of Tides,Nick Nolte,1991
+410,golden_globe,best_actor,Scent of a Woman,Al Pacino,1992
+411,golden_globe,best_actor,Philadelphia,Tom Hanks,1993
+412,golden_globe,best_actor,Forrest Gump,Tom Hanks,1994
+413,golden_globe,best_actor,Leaving Las Vegas,Nicolas Cage,1995
+414,golden_globe,best_actor,Shine,Geoffrey Rush,1996
+415,golden_globe,best_actor,Ulee's Gold,Peter Fonda,1997
+416,golden_globe,best_actor,The Truman Show,Jim Carrey,1998
+417,golden_globe,best_actor,The Hurricane,Denzel Washington,1999
+418,golden_globe,best_actor,Cast Away,Tom Hanks,2000
+419,golden_globe,best_actor,A Beautiful Mind,Russell Crowe,2001
+420,golden_globe,best_actor,About Schmidt,Jack Nicholson,2002
+421,golden_globe,best_actor,Mystic River,Sean Penn,2003
+422,golden_globe,best_actor,The Aviator,Leonardo DiCaprio,2004
+423,golden_globe,best_actor,Capote,Philip Seymour Hoffman,2005
+424,golden_globe,best_actor,The Last King of Scotland,Forest Whitaker,2006
+425,golden_globe,best_actor,There Will Be Blood,Daniel Day-Lewis,2007
+426,golden_globe,best_actor,The Wrestler,Mickey Rourke,2008
+427,golden_globe,best_actor,Crazy Heart,Jeff Bridges,2009
+428,golden_globe,best_actor,The King's Speech,Colin Firth,2010
+429,golden_globe,best_actor,The Descendants,George Clooney,2011
+430,golden_globe,best_actor,Lincoln,Daniel Day-Lewis,2012
+431,golden_globe,best_actor,Dallas Buyers Club,Matthew McConaughey,2013
+432,golden_globe,best_actor,The Theory of Everything,Eddie Redmayne,2014
+433,golden_globe,best_actor,The Revenant,Leonardo DiCaprio,2015
+434,golden_globe,best_actor,Manchester by the Sea,Casey Affleck,2016
+435,golden_globe,best_actor,Darkest Hour,Gary Oldman,2017
+436,golden_globe,best_actor,Bohemian Rhapsody,Rami Malek,2018
+437,golden_globe,best_actor,Joker,Joaquin Phoenix,2019
+438,golden_globe,best_actor,Ma Rainey's Black Bottom,Chadwick Boseman,2020
+439,golden_globe,best_actor,King Richard,Will Smith,2021
+440,golden_globe,best_actress,The Song of Bernadette,Jennifer Jones,1943
+441,golden_globe,best_actress,Gaslight,Ingrid Bergman,1944
+442,golden_globe,best_actress,The Bells of St. Mary's,Ingrid Bergman,1945
+443,golden_globe,best_actress,Sister Kenny,Rosalind Russell,1946
+444,golden_globe,best_actress,Mourning Becomes Electra,Rosalind Russell,1947
+445,golden_globe,best_actress,Johnny Belinda,Jane Wyman,1948
+446,golden_globe,best_actress,The Heiress,Olivia de Havilland,1949
+447,golden_globe,best_actress,Sunset Boulevard,Gloria Swanson,1950
+448,golden_globe,best_actress,The Blue Veil,Jane Wyman,1951
+449,golden_globe,best_actress,"Come Back, Little Sheba",Shirley Booth,1952
+450,golden_globe,best_actress,Roman Holiday,Audrey Hepburn,1953
+451,golden_globe,best_actress,The Country Girl,Grace Kelly,1954
+452,golden_globe,best_actress,The Rose Tattoo,Anna Magnani,1955
+453,golden_globe,best_actress,Anastasia,Ingrid Bergman,1956
+454,golden_globe,best_actress,The Three Faces of Eve,Joanne Woodward,1957
+455,golden_globe,best_actress,I Want to Live!,Susan Hayward,1958
+456,golden_globe,best_actress,"Suddenly, Last Summer",Elizabeth Taylor,1959
+457,golden_globe,best_actress,Sunrise at Campobello,Greer Garson,1960
+458,golden_globe,best_actress,Summer and Smoke,Geraldine Page,1961
+459,golden_globe,best_actress,Sweet Bird of Youth,Geraldine Page,1962
+460,golden_globe,best_actress,The L-Shaped Room,Leslie Caron,1963
+461,golden_globe,best_actress,The Pumpkin Eater,Anne Bancroft,1964
+462,golden_globe,best_actress,The Collector,Samantha Eggar,1965
+463,golden_globe,best_actress,A Man and a Woman,Anouk Aimée,1966
+464,golden_globe,best_actress,The Whisperers,Edith Evans,1967
+465,golden_globe,best_actress,"Rachel, Rachel",Joanne Woodward,1968
+466,golden_globe,best_actress,Anne of the Thousand Days,Geneviève Bujold,1969
+467,golden_globe,best_actress,Love Story,Ali MacGraw,1970
+468,golden_globe,best_actress,Klute,Jane Fonda,1971
+469,golden_globe,best_actress,The Emigrants,Liv Ullmann,1972
+470,golden_globe,best_actress,Cinderella Liberty,Marsha Mason,1973
+471,golden_globe,best_actress,A Woman Under the Influence,Gena Rowlands,1974
+472,golden_globe,best_actress,One Flew Over the Cuckoo's Nest,Louise Fletcher,1975
+473,golden_globe,best_actress,Network,Faye Dunaway,1976
+474,golden_globe,best_actress,Julia,Jane Fonda,1977
+475,golden_globe,best_actress,Coming Home,Jane Fonda,1978
+476,golden_globe,best_actress,Norma Rae,Sally Field,1979
+477,golden_globe,best_actress,Ordinary People,Mary Tyler Moore,1980
+478,golden_globe,best_actress,The French Lieutenant's Woman,Meryl Streep,1981
+479,golden_globe,best_actress,Sophie's Choice,Meryl Streep,1982
+480,golden_globe,best_actress,Terms of Endearment,Shirley MacLaine,1983
+481,golden_globe,best_actress,Places in the Heart,Sally Field,1984
+482,golden_globe,best_actress,The Color Purple,Whoopi Goldberg,1985
+483,golden_globe,best_actress,Children of a Lesser God,Marlee Matlin,1986
+484,golden_globe,best_actress,Anna,Sally Kirkland,1987
+485,golden_globe,best_actress,The Accused,Jodie Foster,1988
+486,golden_globe,best_actress,The Fabulous Baker Boys,Michelle Pfeiffer,1989
+487,golden_globe,best_actress,Misery,Kathy Bates,1990
+488,golden_globe,best_actress,The Silence of the Lambs,Jodie Foster,1991
+489,golden_globe,best_actress,Howards End,Emma Thompson,1992
+490,golden_globe,best_actress,The Piano,Holly Hunter,1993
+491,golden_globe,best_actress,Blue Sky,Jessica Lange,1994
+492,golden_globe,best_actress,Casino,Sharon Stone,1995
+493,golden_globe,best_actress,Secrets & Lies,Brenda Blethyn,1996
+494,golden_globe,best_actress,Mrs Brown,Judi Dench,1997
+495,golden_globe,best_actress,Elizabeth,Cate Blanchett,1998
+496,golden_globe,best_actress,Boys Don't Cry,Hilary Swank,1999
+497,golden_globe,best_actress,Erin Brockovich,Julia Roberts,2000
+498,golden_globe,best_actress,In the Bedroom,Sissy Spacek,2001
+499,golden_globe,best_actress,The Hours,Nicole Kidman,2002
+500,golden_globe,best_actress,Monster,Charlize Theron,2003
+501,golden_globe,best_actress,Million Dollar Baby,Hilary Swank,2004
+502,golden_globe,best_actress,Transamerica,Felicity Huffman,2005
+503,golden_globe,best_actress,The Queen,Helen Mirren,2006
+504,golden_globe,best_actress,Away from Her,Julie Christie,2007
+505,golden_globe,best_actress,Revolutionary Road,Kate Winslet,2008
+506,golden_globe,best_actress,The Blind Side,Sandra Bullock,2009
+507,golden_globe,best_actress,Black Swan,Natalie Portman,2010
+508,golden_globe,best_actress,The Iron Lady,Meryl Streep,2011
+509,golden_globe,best_actress,Zero Dark Thirty,Jessica Chastain,2012
+510,golden_globe,best_actress,Blue Jasmine,Cate Blanchett,2013
+511,golden_globe,best_actress,Still Alice,Julianne Moore,2014
+512,golden_globe,best_actress,Room,Brie Larson,2015
+513,golden_globe,best_actress,Elle,Isabelle Huppert,2016
+514,golden_globe,best_actress,"Three Billboards Outside Ebbing, Missouri",Frances McDormand,2017
+515,golden_globe,best_actress,The Wife,Glenn Close,2018
+516,golden_globe,best_actress,Judy,Renée Zellweger,2019
+517,golden_globe,best_actress,The United States vs. Billie Holiday,Andra Day,2020
+518,golden_globe,best_actress,Being the Ricardos,Nicole Kidman,2021
+519,golden_globe,best_picture,The Song of Bernadette,Henry King,1943
+520,golden_globe,best_picture,Going My Way,Leo McCarey,1944
+521,golden_globe,best_picture,The Lost Weekend,Billy Wilder,1945
+522,golden_globe,best_picture,The Best Years of Our Lives,William Wyler,1946
+523,golden_globe,best_picture,Gentleman's Agreement,Elia Kazan,1947
+524,golden_globe,best_picture,Johnny Belinda,Jean Negulesco,1948
+525,golden_globe,best_picture,All the King's Men,Robert Rossen,1949
+526,golden_globe,best_picture,Sunset Boulevard,Billy Wilder,1950
+527,golden_globe,best_picture,A Place in the Sun,George Stevens,1951
+528,golden_globe,best_picture,The Greatest Show on Earth,Cecil B. DeMille,1952
+529,golden_globe,best_picture,The Robe,Henry Koster,1953
+530,golden_globe,best_picture,On the Waterfront,Elia Kazan,1954
+531,golden_globe,best_picture,East of Eden,Elia Kazan,1955
+532,golden_globe,best_picture,Around the World in 80 Days,Michael Anderson,1956
+533,golden_globe,best_picture,The Bridge on the River Kwai,David Lean,1957
+534,golden_globe,best_picture,The Defiant Ones,Stanley Kramer,1958
+535,golden_globe,best_picture,Ben-Hur,William Wyler,1959
+536,golden_globe,best_picture,Spartacus,Stanley Kubrick,1960
+537,golden_globe,best_picture,The Guns of Navarone,J. Lee Thompson,1961
+538,golden_globe,best_picture,Lawrence of Arabia,David Lean,1962
+539,golden_globe,best_picture,The Cardinal,Otto Preminger,1963
+540,golden_globe,best_picture,Becket,Peter Glenville,1964
+541,golden_globe,best_picture,Doctor Zhivago,David Lean,1965
+542,golden_globe,best_picture,A Man for All Seasons,Fred Zinnemann,1966
+543,golden_globe,best_picture,In the Heat of the Night,Norman Jewison,1967
+544,golden_globe,best_picture,The Lion in Winter,Anthony Harvey,1968
+545,golden_globe,best_picture,Anne of the Thousand Days,Charles Jarrott,1969
+546,golden_globe,best_picture,Love Story,Arthur Hiller,1970
+547,golden_globe,best_picture,The French Connection,William Friedkin,1971
+548,golden_globe,best_picture,The Godfather,Francis Ford Coppola,1972
+549,golden_globe,best_picture,The Exorcist,William Friedkin,1973
+550,golden_globe,best_picture,Chinatown,Roman Polanski,1974
+551,golden_globe,best_picture,One Flew Over the Cuckoo's Nest,Miloš Forman,1975
+552,golden_globe,best_picture,Rocky,John G. Avildsen,1976
+553,golden_globe,best_picture,The Turning Point,Herbert Ross,1977
+554,golden_globe,best_picture,Midnight Express,Alan Parker,1978
+555,golden_globe,best_picture,Kramer vs. Kramer,Robert Benton,1979
+556,golden_globe,best_picture,Ordinary People,Robert Redford,1980
+557,golden_globe,best_picture,On Golden Pond,Mark Rydell,1981
+558,golden_globe,best_picture,E.T. the Extra-Terrestrial,Steven Spielberg,1982
+559,golden_globe,best_picture,Terms of Endearment,James L. Brooks,1983
+560,golden_globe,best_picture,Amadeus,Miloš Forman,1984
+561,golden_globe,best_picture,Out of Africa,Sydney Pollack,1985
+562,golden_globe,best_picture,Platoon,Oliver Stone,1986
+563,golden_globe,best_picture,The Last Emperor,Bernardo Bertolucci,1987
+564,golden_globe,best_picture,Rain Man,Barry Levinson,1988
+565,golden_globe,best_picture,Born on the Fourth of July,Oliver Stone,1989
+566,golden_globe,best_picture,Dances with Wolves,Kevin Costner,1990
+567,golden_globe,best_picture,Bugsy,Barry Levinson,1991
+568,golden_globe,best_picture,Scent of a Woman,Martin Brest,1992
+569,golden_globe,best_picture,Schindler's List,Steven Spielberg,1993
+570,golden_globe,best_picture,Forrest Gump,Robert Zemeckis,1994
+571,golden_globe,best_picture,Sense and Sensibility,Ang Lee,1995
+572,golden_globe,best_picture,The English Patient,Anthony Minghella,1996
+573,golden_globe,best_picture,Titanic,James Cameron,1997
+574,golden_globe,best_picture,Saving Private Ryan,Steven Spielberg,1998
+575,golden_globe,best_picture,American Beauty,Sam Mendes,1999
+576,golden_globe,best_picture,Gladiator,Ridley Scott,2000
+577,golden_globe,best_picture,A Beautiful Mind,Ron Howard,2001
+578,golden_globe,best_picture,The Hours,Stephen Daldry,2002
+579,golden_globe,best_picture,The Lord of the Rings: The Return of the King,Peter Jackson,2003
+580,golden_globe,best_picture,The Aviator,Martin Scorsese,2004
+581,golden_globe,best_picture,Brokeback Mountain,Ang Lee,2005
+582,golden_globe,best_picture,Babel,Alejandro González Iñárritu,2006
+583,golden_globe,best_picture,Atonement,Joe Wright,2007
+584,golden_globe,best_picture,Slumdog Millionaire,Danny Boyle,2008
+585,golden_globe,best_picture,Avatar,James Cameron,2009
+586,golden_globe,best_picture,The Social Network,David Fincher,2010
+587,golden_globe,best_picture,The Descendants,Alexander Payne,2011
+588,golden_globe,best_picture,Argo,Ben Affleck,2012
+589,golden_globe,best_picture,12 Years a Slave,Steve McQueen,2013
+590,golden_globe,best_picture,Boyhood,Richard Linklater,2014
+591,golden_globe,best_picture,The Revenant,Alejandro G. Iñárritu,2015
+592,golden_globe,best_picture,Moonlight,Barry Jenkins,2016
+593,golden_globe,best_picture,"Three Billboards Outside Ebbing, Missouri",Martin McDonagh,2017
+594,golden_globe,best_picture,Bohemian Rhapsody,Bryan Singer,2018
+595,golden_globe,best_picture,1917,Sam Mendes,2019
+596,golden_globe,best_picture,Nomadland,Chloé Zhao,2020
+597,golden_globe,best_picture,The Power of the Dog,Jane Campion,2021
