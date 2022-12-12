@@ -12,6 +12,7 @@
   "crawler": {
     "on": true
   },
+  "topics": true,
   "extract": {
     "topics": {
       "filepath_or_buffer": "src/files/archive/topic_words.csv",

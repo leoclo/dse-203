@@ -11,10 +11,7 @@ def extract_transform(settings):
         crawler_award(settings)
 
     for k, meta in settings['transform'].items():
-
-
         df = pd.read_csv(**settings['extract'][k])
-
         df = df[meta['column_map'].keys()]
         df.rename(columns=meta['column_map'], inplace=True)
         df = df[meta['column_map'].values()]
