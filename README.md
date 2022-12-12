@@ -77,18 +77,93 @@ using app modules
 
 # How it works
 
-We use a JSON file to set the behavior of the
+final_app.ipynb:
+```
+settings = utils.get_settings_notebook('../settings_topics.json')
 
+```
 
+We use a JSON file to set the behavior of the overall program. This determines where the .csv source files are kept, how the columns should be mapped, and how the nodes are created and loaded in from the pre-processed data. It also has a switch for whether or not the web crawler is activated during the run.
 
-With the graph created, this query is then passed in to create the final keyword node, which unravels the topic nodes into their component keywords and merge them together by their unique value. This allows the nodes to connect across the scope of all movies, not just within the batch of 30.
+`settings_topics.json` simply loads in the data for directors, cast, and movies, and does not perform any actions with neo4j.
 
+final_app.ipynb:
+```
+app = App(settings)
+dfs = app.extract_transform()
+```
 
+We start by runing `extract_transform()`, which performs the action of both extracting the data from the csv files and transforming them into a dictionary of dataframes called `dfs`.
+
+core.py:
+```
+def extract_transform(settings):
+    df_transform = DataFrameTransform()
+
+    if settings['crawler']['on']:
+        crawler_award(settings)
+
+    for k, meta in settings['transform'].items():
+        df = pd.read_csv(**settings['extract'][k])
+        df = df[meta['column_map'].keys()]
+        df.rename(columns=meta['column_map'], inplace=True)
+        df = df[meta['column_map'].values()]
+        df_transform[k](df)
+
+    return df_transform.dfs
+```
+
+The extraction process takes a dictionary in which the keys are the names of columns in the csv, and maps them to a new dataframe with the value designating the target column in the dataframe. Not all columns need to be selected.
+
+We also perform a crawl using `crawler_award(settings)` if enabled, which writes out the award files first before they are extracted.
+
+While each dataframe is extraccted, it undergoes a transformation in `df_transform[k](df)` which preprocesses the data and adds it to `df_transform.dfs`.
+
+Using `settings_topics.json`, we extract and transform the movie, cast, and director dataframes.
+
+final_app.ipynb:
+```
+movie_topics = gen_topics()
+# (df_movie_topics, df_topic_words) = movie_topics.batch_process(data_df['movies'][data_df['movies']['lang'] == 'en'])
+(df_movie_topics, df_topic_words) = movie_topics.batch_process(dfs['movies'][
+    dfs['movies']['overview'].apply(lambda x: x is not None and len(x) > 30)
+])
+df_topic_words.reset_index(drop=True, inplace=True)
+df_movie_topics.reset_index(drop=True, inplace=True)
+# display(df_topic_words)
+# display(df_movie_topics)
+df_topic_words.to_csv('./files/archive/topic_words.csv', index=True)
+df_movie_topics.to_csv('./files/archive/movie_topic_ids.csv', index=True)
+```
+Using this limited dictionary of dataframes, we take the movies we prunned down to and generate topics for them and write them into a file.
+
+With the graph created, a query is then passed in to create the final keyword node, which unravels the topic nodes into their component keywords and merge them together by their unique value. This allows the nodes to connect across the scope of all movies, not just within the batch of 30.
+
+final_app.ipynb:
+```
+settings = utils.get_settings_notebook('../settings.json')
+app = App(settings)
+app.etl()
+```
+
+Using `settings.json` extracts from all the files, including data for awards and topics.
+
+`app.etl` calls the same `extract_transform()` function from before, but with the new settings file, all the data we are working with is extracted and transformed. Then, using the connection and authentication data provided in the settings file, connects to neo4j and exports the information in the dataframes to the database based on the template provided by the settings file.
+
+final_app.ipynb:
+```
+graph4j = GraphNeo4j(**{**settings['neo4j'], 'clear_data': False})
+qry = '''
+    MATCH (t:Topic)<-[]-(m:Movie) UNWIND(t.topics) as keyword
+    MERGE (k:Keyword {keyword: keyword})
+    MERGE (k)<-[:HAS_KEYWORD]-(m)
 '''
+graph4j.run_query(qry, {})
+```
 
-'''
+Lastly, the first query for the new data is executed so as to create the keyword nodes from the topic nodes and link them up with all the movies each keyword is associated with by topic.
 
-Note: the keyword comes from the topic node, not the overview of the movies they link to, and as such might not actually be in the overview.
+Note: Since the keyword comes from the topic node, not the overview of the movies they link to, the keyword value might not actually be in the overview.
 
 # Queries For Project
 
