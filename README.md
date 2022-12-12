@@ -55,9 +55,7 @@ pip install -r requirements.txt
 
 ## Dataset Download Kaggle
 
-https://www.kaggle.com/datasets/stephanerappeneau/350-000-movies-from-themoviedborg
-
-Download the dataset and unzip the archive folder into folder src/files. The files should be in src/files/archive and you should get the following tree.
+Download the dataset archive from the download button at the top and unzip the archive folder into folder src/files. The files should be in src/files/archive and you should get the following tree.
 
 - [repository root]
   - src
